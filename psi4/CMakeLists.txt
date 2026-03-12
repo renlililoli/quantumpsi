@@ -9,10 +9,12 @@ add_executable(
 
 target_compile_features(${SCF_BENCH_TARGET} PRIVATE cxx_std_17)
 
+get_filename_component(_bench_cases "${CMAKE_CURRENT_LIST_DIR}/../scf/cases" ABSOLUTE)
 target_compile_definitions(
   ${SCF_BENCH_TARGET}
   PRIVATE
     psi4_SHGSHELL_ORDERING=${psi4_SHGSHELL_ORDERING}
+    BENCHMARK_CASES_DIR="${_bench_cases}"
 )
 
 target_include_directories(

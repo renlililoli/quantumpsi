@@ -18,6 +18,7 @@
 #include "psi4/libciomr/libciomr.h"
 #include "psi4/libfunctional/superfunctional.h"
 #include "psi4/libmints/basisset.h"
+#include "psi4/libmints/matrix.h"
 #include "psi4/libmints/element_to_Z.h"
 #include "psi4/libmints/gshell.h"
 #include "psi4/libmints/molecule.h"
@@ -25,6 +26,7 @@
 #include "psi4/liboptions/liboptions.h"
 #include "psi4/libpsi4util/PsiOutStream.h"
 #include "psi4/libpsi4util/process.h"
+#include "psi4/libfock/jk.h"
 #include "psi4/libpsio/psio.h"
 #include "psi4/libpsio/psio.hpp"
 #include "psi4/libqt/qt.h"
@@ -60,6 +62,34 @@ struct Config {
 std::string uppercase(std::string text) {
     for (char& c : text) c = static_cast<char>(std::toupper(static_cast<unsigned char>(c)));
     return text;
+}
+
+inline bool file_exists(const std::string& path) {
+    std::ifstream f(path);
+    return f.good();
+}
+
+/** Resolve case file path. Tries path as-is, then BENCHMARK_CASES_DIR (from CMake), then PSI4_BENCHMARK_ROOT env. */
+std::string resolve_case_file(const std::string& path) {
+    if (file_exists(path)) return path;
+    /* Fallback only when using the default case file name */
+    const bool is_default = (path.find("benzene_dimer.xyz") != std::string::npos);
+    if (!is_default)
+        throw std::runtime_error("Case file not found: " + path);
+#ifdef BENCHMARK_CASES_DIR
+    {
+        std::string alt = std::string(BENCHMARK_CASES_DIR) + "/benzene_dimer.xyz";
+        if (file_exists(alt)) return alt;
+    }
+#endif
+    const char* root = std::getenv("PSI4_BENCHMARK_ROOT");
+    if (root) {
+        std::string alt = std::string(root) + "/benchmark/scf/cases/benzene_dimer.xyz";
+        if (file_exists(alt)) return alt;
+    }
+    throw std::runtime_error(
+        "Case file not found: " + path +
+        "\n  Run from project root, or set PSI4_BENCHMARK_ROOT, or pass --case-file <path>");
 }
 
 void print_usage(const char* argv0) {
@@ -120,8 +150,13 @@ Config parse_args(int argc, char** argv) {
     return config;
 }
 
+#define DBG(...) do { std::cerr << "[DBG] "; std::cerr << __VA_ARGS__ << std::endl; } while (0)
+#define DBG_FLUSH(...) do { std::cerr << "[DBG] "; std::cerr << __VA_ARGS__ << std::flush; } while (0)
+
 void initialize_runtime(const Config& config) {
+    DBG("initialize_runtime: Wavefunction::initialize_singletons");
     psi::Wavefunction::initialize_singletons();
+    DBG("initialize_runtime: BasisSet::initialize_singletons");
     psi::BasisSet::initialize_singletons();
 
     psi::outfile_name = config.output_file;
@@ -134,8 +169,11 @@ void initialize_runtime(const Config& config) {
     const std::string prefix = "psi";
     psi::psi_file_prefix = strdup(prefix.c_str());
 
+    DBG("initialize_runtime: timer_init");
     psi::timer_init();
+    DBG("initialize_runtime: psio_init");
     psi::psio_init();
+    DBG("initialize_runtime: Process::environment.initialize");
     psi::Process::environment.initialize();
     psi::Process::environment.set_memory(static_cast<size_t>(config.memory_mib) * 1024ULL * 1024ULL);
     psi::Process::environment.set_n_threads(config.threads);
@@ -144,16 +182,21 @@ void initialize_runtime(const Config& config) {
         psi::PSIOManager::shared_object()->set_default_path(config.scratch_dir);
     }
 
+    DBG("initialize_runtime: read global options");
     auto& options = psi::Process::environment.options;
     options.set_read_globals(true);
     psi::read_options("", options, true);
     options.set_read_globals(false);
+    DBG("initialize_runtime: read SCF options");
     options.set_current_module("SCF");
     psi::read_options("SCF", options, true);
+    DBG("initialize_runtime: validate_options");
     options.validate_options();
+    DBG("initialize_runtime: done");
 }
 
 void configure_libint() {
+    DBG("configure_libint: start");
     // Match the Psi4 build's solid-harmonic ordering when that compile-time
     // setting is available. Fall back to the common standard ordering otherwise.
 #if defined(psi4_SHGSHELL_ORDERING) && (psi4_SHGSHELL_ORDERING == LIBINT_SHGSHELL_ORDERING_GAUSSIAN)
@@ -162,6 +205,7 @@ void configure_libint() {
     libint2::set_solid_harmonics_ordering(libint2::SHGShellOrdering_Standard);
 #endif
     libint2::initialize();
+    DBG("configure_libint: done");
 }
 
 void finalize_runtime(bool libint_initialized) {
@@ -176,6 +220,7 @@ void finalize_runtime(bool libint_initialized) {
 }
 
 std::shared_ptr<psi::Molecule> load_xyz_molecule(const std::string& path) {
+    DBG("load_xyz_molecule: " << path);
     std::ifstream input(path);
     if (!input) throw std::runtime_error("Failed to open XYZ file: " + path);
 
@@ -211,7 +256,13 @@ std::shared_ptr<psi::Molecule> load_xyz_molecule(const std::string& path) {
         molecule->add_atom(Z, x, y, z, upper_symbol, 0.0, 0.0, upper_symbol);
     }
 
+    /* Must set fragment pattern before update_geometry(); otherwise reinterpret_coordentries()
+     * clears atoms_ and never repopulates it (fragments_ empty => natom() becomes 0). */
+    molecule->set_fragment_pattern({{0, static_cast<int>(natom)}}, {psi::Molecule::Real},
+                                  {0}, {1});
+    DBG("load_xyz_molecule: update_geometry, natom=" << natom);
     molecule->update_geometry();
+    DBG("load_xyz_molecule: done");
     return molecule;
 }
 
@@ -278,6 +329,77 @@ std::shared_ptr<psi::SuperFunctional> build_hf_superfunctional() {
     return functional;
 }
 
+/** Run SCF iterations. Replicates Python scf_compute_energy logic for standalone build. */
+double run_scf(std::shared_ptr<psi::scf::RHF> rhf) {
+    DBG("run_scf: start");
+    auto& options = psi::Process::environment.options;
+    auto basis = rhf->basisset();
+    options.set_current_module("SCF");
+    const double e_conv = options.get_double("E_CONVERGENCE");
+    const double d_conv = options.get_double("D_CONVERGENCE");
+    const int maxiter = options.get_int("MAXITER");
+    const double level_shift = options.get_double("LEVEL_SHIFT");
+    const double level_shift_cutoff = options.get_double("LEVEL_SHIFT_CUTOFF");
+    DBG("run_scf: e_conv=" << e_conv << " d_conv=" << d_conv << " maxiter=" << maxiter);
+
+    DBG("run_scf: JK::build_JK");
+    auto jk = psi::JK::build_JK(basis, nullptr, options, options.get_str("SCF_TYPE"));
+    jk->set_print(rhf->get_print());
+    jk->set_do_K(true);
+    DBG("run_scf: jk->initialize");
+    jk->initialize();
+    DBG("run_scf: jk->initialize done, set_jk");
+    rhf->set_jk(jk);
+
+    DBG("run_scf: form_H");
+    rhf->form_H();
+    DBG("run_scf: form_Shalf");
+    rhf->form_Shalf();
+    DBG("run_scf: guess");
+    rhf->guess();
+
+    double e_old = 0.0;
+    double e_prev_2 = 0.0;  /* energy from 2 iters ago, for oscillation detection */
+    DBG("run_scf: SCF iteration loop start");
+    for (int iter = 1; iter <= maxiter; ++iter) {
+        rhf->set_iteration(iter);
+        rhf->save_density_and_energy();
+        rhf->form_G();
+        rhf->form_F();
+        const double e_new = rhf->compute_E();
+        rhf->set_energies("Total Energy", e_new);
+
+        const double de = std::abs(e_new - e_old);
+        double dnorm = 0.0;
+        if (iter > 1) {
+            auto gradient = rhf->form_FDSmSDF(rhf->Fa(), rhf->Da());
+            dnorm = gradient->absmax();
+        }
+        const bool oscillating = (iter >= 6) && (std::abs(e_new - e_prev_2) < 1.0e-4);
+        const bool use_level_shift = (level_shift > 0.0) &&
+            (dnorm > level_shift_cutoff || oscillating);
+        e_prev_2 = e_old;
+        e_old = e_new;
+
+        DBG("run_scf: iter=" << iter << " E=" << e_new << " de=" << de << " dnorm=" << dnorm
+            << (use_level_shift ? " [LEVEL_SHIFT]" : ""));
+        if (de < e_conv && dnorm < d_conv) {
+            DBG("run_scf: converged at iter=" << iter);
+            break;
+        }
+        if (use_level_shift) {
+            rhf->form_C(level_shift);
+        } else {
+            rhf->form_C();
+        }
+        rhf->form_D();
+    }
+
+    DBG("run_scf: finalize");
+    rhf->finalize();
+    return rhf->energy();
+}
+
 void configure_options(const Config& config) {
     auto& options = psi::Process::environment.options;
 
@@ -291,8 +413,10 @@ void configure_options(const Config& config) {
     options.set_str("SCF", "GUESS", "CORE");
     options.set_double("SCF", "E_CONVERGENCE", 1.0e-8);
     options.set_double("SCF", "D_CONVERGENCE", 1.0e-8);
-    options.set_int("SCF", "MAXITER", 100);
+    options.set_int("SCF", "MAXITER", 10);
     options.set_double("SCF", "INTS_TOLERANCE", 1.0e-12);
+    options.set_double("SCF", "LEVEL_SHIFT", 0.1);
+    options.set_double("SCF", "LEVEL_SHIFT_CUTOFF", 1.0e-2);
 }
 
 struct RunResult {
@@ -303,9 +427,15 @@ struct RunResult {
 };
 
 RunResult run_one_scf(const Config& config) {
+    DBG("run_one_scf: configure_options");
     configure_options(config);
 
-    auto molecule = load_xyz_molecule(config.case_file);
+    DBG("run_one_scf: resolve_case_file");
+    const std::string resolved_path = resolve_case_file(config.case_file);
+    auto molecule = load_xyz_molecule(resolved_path);
+    if (molecule->natom() == 0)
+        throw std::runtime_error("Molecule has no atoms. Case file may be empty or malformed: " + resolved_path);
+    DBG("run_one_scf: build_embedded_631g_d_basis");
     auto basis = build_embedded_631g_d_basis(molecule);
     auto reference = std::make_shared<psi::Wavefunction>(molecule, basis, psi::Process::environment.options);
     auto functional = build_hf_superfunctional();
@@ -314,15 +444,17 @@ RunResult run_one_scf(const Config& config) {
     psi::PSIOManager::shared_object()->psiclean();
 
     psi::outfile->Printf("\n  Standalone SCF benchmark\n");
-    psi::outfile->Printf("  Case file: %s\n", config.case_file.c_str());
+    psi::outfile->Printf("  Case file: %s\n", resolved_path.c_str());
     psi::outfile->Printf("  Basis:     %s\n", basis->name().c_str());
     psi::outfile->Printf("  SCF_TYPE:  %s\n", config.scf_type.c_str());
     psi::outfile->Printf("  Threads:   %d\n\n", config.threads);
 
+    DBG("run_one_scf: creating RHF");
     auto rhf = std::make_shared<psi::scf::RHF>(reference, functional);
 
     const auto t0 = Clock::now();
-    const double energy = rhf->compute_energy();
+    DBG("run_one_scf: calling run_scf");
+    const double energy = run_scf(rhf);
     const auto t1 = Clock::now();
 
     RunResult result;
@@ -364,7 +496,9 @@ int main(int argc, char** argv) {
     bool libint_initialized = false;
 
     try {
+        DBG("main: parse_args");
         const Config config = parse_args(argc, argv);
+        DBG("main: case_file=" << config.case_file << " scf_type=" << config.scf_type << " threads=" << config.threads);
 
         /* Avoid SIGSEGV in mkl_set_num_threads when MKL isn't initialized yet in
          * standalone build. Set env vars so MKL/OMP use the right thread count. */
@@ -376,13 +510,18 @@ int main(int argc, char** argv) {
             setenv("PSI4_SKIP_MKL_SET_NUM_THREADS", "1", 1);
         }
 
+        DBG("main: initialize_runtime");
         initialize_runtime(config);
         runtime_initialized = true;
+        DBG("main: configure_libint");
         configure_libint();
         libint_initialized = true;
 
+        DBG("main: entering run loop, repeat=" << config.repeat);
         for (int run = 1; run <= config.repeat; ++run) {
+            DBG("main: run " << run << "/" << config.repeat);
             const RunResult result = run_one_scf(config);
+            DBG("main: run " << run << " done, energy=" << result.energy);
             append_csv(config, result, run);
 
             std::cout << "run=" << run
