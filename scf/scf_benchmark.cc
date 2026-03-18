@@ -57,6 +57,7 @@ struct Config {
     int repeat = 1;
     long memory_mib = 1024;
     std::string scf_type = "DIRECT";
+    int debug = 0;  /* DirectJK debug level: 0=none, 1=summary, 2=verbose */
 };
 
 std::string uppercase(std::string text) {
@@ -102,7 +103,8 @@ void print_usage(const char* argv0) {
         << "  --threads <n>          OpenMP / MKL thread count. Default: 1\n"
         << "  --repeat <n>           Number of identical runs in one process. Default: 1\n"
         << "  --memory-mib <n>       Psi4 memory limit in MiB. Default: 1024\n"
-        << "  --scf-type <type>      DIRECT or PK. Default: DIRECT\n";
+        << "  --scf-type <type>      DIRECT or PK. Default: DIRECT\n"
+        << "  --debug <n>            JK debug level (0/1/2). Default: 0. 1=summary, 2=verbose.\n";
 }
 
 Config parse_args(int argc, char** argv) {
@@ -132,6 +134,8 @@ Config parse_args(int argc, char** argv) {
             config.memory_mib = std::stol(next_value("--memory-mib"));
         } else if (arg == "--scf-type") {
             config.scf_type = uppercase(next_value("--scf-type"));
+        } else if (arg == "--debug") {
+            config.debug = std::stoi(next_value("--debug"));
         } else if (arg == "--help" || arg == "-h") {
             print_usage(argv[0]);
             std::exit(0);
@@ -145,6 +149,9 @@ Config parse_args(int argc, char** argv) {
     if (config.memory_mib < 1) throw std::runtime_error("--memory-mib must be >= 1");
     if (config.scf_type != "DIRECT" && config.scf_type != "PK") {
         throw std::runtime_error("--scf-type must be DIRECT or PK");
+    }
+    if (config.debug < 0 || config.debug > 2) {
+        throw std::runtime_error("--debug must be 0, 1, or 2");
     }
 
     return config;
@@ -406,6 +413,9 @@ void configure_options(const Config& config) {
     options.set_global_str("BASIS", "EMBEDDED_631G_D");
     options.set_global_str("SCF_TYPE", config.scf_type);
     options.set_global_str("REFERENCE", "RHF");
+    if (config.debug > 0) {
+        options.set_global_int("DEBUG", config.debug);
+    }
     options.set_global_str("FREEZE_CORE", "FALSE");
     options.set_global_int("PRINT", 2);
     options.set_global_bool("PUREAM", false);
