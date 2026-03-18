@@ -1,0 +1,129 @@
+#!/bin/bash
+#
+# ARM/x86 多核 Benchmark 采集脚本（跨平台便携版）
+#
+# 依赖：bash、Python 3、已配置好的 Psi4 环境。不依赖 MKL，支持 OpenBLAS 等。
+#
+# 用法:
+#   在 x86 上: ./run_benchmark.sh --platform x86 [--project-root /path/to/quantum-psi]
+#   在 ARM 上: ./run_benchmark.sh --platform arm [--project-root /path/to/quantum-psi]
+#
+# 参数:
+#   --platform arm|x86    必填
+#   --project-root DIR    quantum-psi 项目根目录，含 benchmark/scf 等
+#   --threads "1 2 4 8"  线程点
+#   --repeat 5           每点重复次数
+#   --methods "scf sapt0 ccsd"
+#   --results-dir DIR    结果目录，默认 <project-root>/results
+#
+set -e
+
+PORTABLE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT=""
+RESULTS_DIR=""
+PLATFORM=""
+THREADS="1 2 4 8 16 32"
+REPEAT=5
+METHODS="scf sapt0 ccsd"
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        --platform)      PLATFORM="$2"; shift 2 ;;
+        --project-root) PROJECT_ROOT="$2"; shift 2 ;;
+        --threads)      THREADS="$2"; shift 2 ;;
+        --repeat)       REPEAT="$2";  shift 2 ;;
+        --methods)      METHODS="$2"; shift 2 ;;
+        --results-dir)  RESULTS_DIR="$2"; shift 2 ;;
+        -h|--help)
+            echo "Usage: $0 --platform arm|x86 [--project-root DIR] [--threads \"1 2 4 8\"] [--repeat 5]"
+            exit 0 ;;
+        *) echo "Unknown option: $1"; exit 1 ;;
+    esac
+done
+
+if [[ -z "$PLATFORM" ]]; then
+    echo "ERROR: --platform arm or x86 is required"
+    exit 1
+fi
+
+# 默认 project root：便携包所在目录的上两级 (benchmark/arm-x86-portable -> .)
+if [[ -z "$PROJECT_ROOT" ]]; then
+    PROJECT_ROOT="$(cd "$PORTABLE_DIR/../.." && pwd)"
+fi
+PROJECT_ROOT="$(cd "$PROJECT_ROOT" && pwd)"
+
+if [[ -z "$RESULTS_DIR" ]]; then
+    RESULTS_DIR="$PROJECT_ROOT/results"
+fi
+
+# 校验 benchmark 脚本存在
+if [[ ! -f "$PROJECT_ROOT/benchmark/scf/run_scf_benchmark.py" ]]; then
+    echo "ERROR: benchmark scripts not found in $PROJECT_ROOT"
+    echo "Specify --project-root /path/to/quantum-psi"
+    exit 1
+fi
+
+cd "$PROJECT_ROOT"
+
+# 加载环境（若有）
+if [[ -f "$PROJECT_ROOT/workspace/.env" ]]; then
+    source "$PROJECT_ROOT/workspace/.env"
+fi
+
+OUT_DIR="$RESULTS_DIR/$PLATFORM"
+mkdir -p "$OUT_DIR"
+RAW_CSV="$OUT_DIR/benchmark_raw.csv"
+
+echo "platform,method,threads,run_idx,elapsed_s,energy" > "$RAW_CSV"
+
+run_benchmark() {
+    local method=$1 t=$2 run_idx=$3
+    local elapsed energy out
+    case $method in
+        scf)
+            out=$(python benchmark/scf/run_scf_benchmark.py --threads "$t" --single-iter --repeat 1 2>/dev/null | grep "^run=" || true)
+            ;;
+        sapt0)
+            out=$(python benchmark/sapt0/run_sapt0_benchmark.py --threads "$t" --repeat 1 2>/dev/null | grep "^run=" || true)
+            ;;
+        ccsd)
+            out=$(python benchmark/ccsd/run_ccsd_benchmark.py --threads "$t" --single-iter --repeat 1 2>/dev/null | grep "^run=" || true)
+            ;;
+        *) echo "Unknown method: $method"; return 1 ;;
+    esac
+    elapsed=$(echo "$out" | sed -n 's/.*elapsed_s=\([0-9.]*\).*/\1/p')
+    energy=$(echo "$out"  | sed -n 's/.*energy=\(-\?[0-9.]*\).*/\1/p')
+    if [[ -z "$elapsed" ]]; then
+        echo "WARN: Failed to parse elapsed_s for $method t=$t run=$run_idx" >&2
+        return 1
+    fi
+    echo "${PLATFORM},${method},${t},${run_idx},${elapsed},${energy}" >> "$RAW_CSV"
+}
+
+echo "=========================================="
+echo "ARM/x86 Benchmark: platform=$PLATFORM project=$PROJECT_ROOT"
+echo "Threads=$THREADS repeat=$REPEAT results=$OUT_DIR"
+echo "=========================================="
+
+for method in $METHODS; do
+    for t in $THREADS; do
+        echo "[$method] threads=$t ..."
+        for i in $(seq 1 $REPEAT); do
+            run_benchmark "$method" "$t" "$i" || true
+        done
+    done
+done
+
+{
+    echo "platform=$PLATFORM"
+    echo "date=$(date -Iseconds 2>/dev/null || date)"
+    uname -a
+    echo "---"
+    (lscpu 2>/dev/null || true)
+    echo "---"
+    (numactl --hardware 2>/dev/null || true)
+} > "$OUT_DIR/platform_info.txt"
+
+echo ""
+echo "Done. Raw data: $RAW_CSV"
+echo "Generate report: python $PORTABLE_DIR/generate_report.py --results-dir $RESULTS_DIR"
