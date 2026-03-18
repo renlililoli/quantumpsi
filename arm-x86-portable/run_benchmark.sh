@@ -13,7 +13,7 @@
 #   --project-root DIR    quantum-psi 项目根目录，含 benchmark/scf 等
 #   --threads "1 2 4 8"  线程点
 #   --repeat 5           每点重复次数
-#   --methods "scf sapt0 ccsd"
+#   --methods "scf dft mp2 sapt0 ccsd"
 #   --results-dir DIR    结果目录，默认 <project-root>/results
 #
 set -e
@@ -24,7 +24,7 @@ RESULTS_DIR=""
 PLATFORM=""
 THREADS="1 2 4 8 16 32"
 REPEAT=5
-METHODS="scf sapt0 ccsd"
+METHODS="scf dft mp2 sapt0 ccsd"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -65,10 +65,10 @@ fi
 
 cd "$PROJECT_ROOT"
 
-# 加载环境（若有）
-if [[ -f "$PROJECT_ROOT/workspace/.env" ]]; then
-    source "$PROJECT_ROOT/workspace/.env"
-fi
+# # 加载环境（若有）
+# if [[ -f "$PROJECT_ROOT/workspace/.env" ]]; then
+#     source "$PROJECT_ROOT/workspace/.env"
+# fi
 
 OUT_DIR="$RESULTS_DIR/$PLATFORM"
 mkdir -p "$OUT_DIR"
@@ -78,16 +78,23 @@ echo "platform,method,threads,run_idx,elapsed_s,energy" > "$RAW_CSV"
 
 run_benchmark() {
     local method=$1 t=$2 run_idx=$3
-    local elapsed energy out
+    local elapsed energy out err
+    err=$(mktemp)
     case $method in
         scf)
-            out=$(python benchmark/scf/run_scf_benchmark.py --threads "$t" --single-iter --repeat 1 2>/dev/null | grep "^run=" || true)
+            out=$(python benchmark/scf/run_scf_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            ;;
+        dft)
+            out=$(python benchmark/dft/run_dft_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            ;;
+        mp2)
+            out=$(python benchmark/mp2/run_mp2_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         sapt0)
-            out=$(python benchmark/sapt0/run_sapt0_benchmark.py --threads "$t" --repeat 1 2>/dev/null | grep "^run=" || true)
+            out=$(python benchmark/sapt0/run_sapt0_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         ccsd)
-            out=$(python benchmark/ccsd/run_ccsd_benchmark.py --threads "$t" --single-iter --repeat 1 2>/dev/null | grep "^run=" || true)
+            out=$(python benchmark/ccsd/run_ccsd_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         *) echo "Unknown method: $method"; return 1 ;;
     esac
@@ -95,8 +102,11 @@ run_benchmark() {
     energy=$(echo "$out"  | sed -n 's/.*energy=\(-\?[0-9.]*\).*/\1/p')
     if [[ -z "$elapsed" ]]; then
         echo "WARN: Failed to parse elapsed_s for $method t=$t run=$run_idx" >&2
+        [[ -s "$err" ]] && tail -20 "$err" >&2
+        rm -f "$err"
         return 1
     fi
+    rm -f "$err"
     echo "${PLATFORM},${method},${t},${run_idx},${elapsed},${energy}" >> "$RAW_CSV"
 }
 

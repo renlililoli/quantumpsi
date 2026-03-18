@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
-DF-CCSD(T) benchmark with Python thin wrapper for basis set loading.
+DF-MP2 benchmark with Python thin wrapper for basis set loading.
 
-Heavy compute (SCF, DF-CC integrals, CCSD iterations, (T) correction) runs in C++.
-Use perf to profile: perf record -g -F 99 -- python run_ccsd_benchmark.py --threads 8
+Heavy compute (DF-SCF, DF-MP2 correlation) runs in C++. Same geometry as CCSD.
+Use perf to profile: perf record -g -F 99 -- python run_mp2_benchmark.py --threads 8
 """
 from __future__ import print_function
 import argparse
 import sys
 import time
 
-# Formic acid dimer (10 atoms) - suitable for 6226R-level CPU
+# Formic acid dimer (10 atoms) - same as CCSD, suitable for 6226R-level CPU
 # From psi4/tests/dfmp2-1
-CCSD_GEOMETRY = """
+MP2_GEOMETRY = """
 0 1
 C  -1.888896  -0.179692   0.000000
 O  -1.493280   1.073689   0.000000
@@ -31,11 +31,9 @@ units angstrom
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="DF-CCSD(T) benchmark (Python basis wrapper)")
+    p = argparse.ArgumentParser(description="DF-MP2 benchmark (Python basis wrapper)")
     p.add_argument("--threads", type=int, default=1)
     p.add_argument("--repeat", type=int, default=1)
-    p.add_argument("--single-iter", action="store_true",
-                   help="Run CCSD with maxiter=1 (one iteration) for perf focus")
     p.add_argument("--output-file", default="stdout")
     p.add_argument("--csv-file", default="")
     p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to input file")
@@ -49,19 +47,14 @@ def run_one(args):
     psi4.core.set_num_threads(args.threads)
     psi4.set_memory("4 GB")
 
-    opts = {
+    psi4.set_options({
         "basis": "cc-pvdz",
         "df_basis_scf": "cc-pvdz-jkfit",
-        "df_basis_cc": "cc-pvdz-ri",
+        "df_basis_mp2": "cc-pvdz-ri",
         "scf_type": "df",
         "guess": "sad",
         "freeze_core": True,
-        "cc_type": "df",
-        "qc_module": "occ",
-    }
-    if args.single_iter:
-        opts["cc_maxiter"] = 1  # DFOCC CCSD max iterations
-    psi4.set_options(opts)
+    })
 
     if args.geometry:
         try:
@@ -71,17 +64,15 @@ def run_one(args):
             geom = args.geometry
         mol = psi4.geometry(geom)
     else:
-        mol = psi4.geometry(CCSD_GEOMETRY)
+        mol = psi4.geometry(MP2_GEOMETRY)
 
     t0 = time.perf_counter()
-    e, wfn = psi4.energy("ccsd(t)", molecule=mol, return_wfn=True)
+    e = psi4.energy("mp2", molecule=mol)
     t1 = time.perf_counter()
 
-    nbf = wfn.basisset().nbf() if (wfn and hasattr(wfn, "basisset")) else 0
     return {
         "energy": e,
         "elapsed_s": t1 - t0,
-        "nbf": nbf,
     }
 
 
@@ -109,7 +100,7 @@ def main():
         psi4.core.timer_done()
         with open("timer.dat") as t:
             for ln in t:
-                if any(x in ln for x in ("DF CC", "CCSD", "(T)", "FNOCC", "Triples", "DF-HF")):
+                if any(x in ln for x in ("DF-MP2", "DF-HF", "MP2")):
                     print("[TIMING] " + ln.rstrip(), flush=True)
     except (IOError, NameError, AttributeError):
         pass
