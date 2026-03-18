@@ -13,7 +13,7 @@
 #   --project-root DIR    quantum-psi 项目根目录，含 benchmark/scf 等
 #   --threads "1 2 4 8"  线程点
 #   --repeat 5           每点重复次数
-#   --methods "scf dft mp2 sapt0 ccsd"
+#   --methods "scf dft mp2 sapt0 ccsd gradient hessian frequency"
 #   --results-dir DIR    结果目录，默认 <project-root>/results
 #
 set -e
@@ -24,7 +24,7 @@ RESULTS_DIR=""
 PLATFORM=""
 THREADS="1 2 4 8 16 32"
 REPEAT=5
-METHODS="scf dft mp2 sapt0 ccsd"
+METHODS="scf dft mp2 sapt0 ccsd gradient hessian frequency"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -95,6 +95,15 @@ run_benchmark() {
             ;;
         ccsd)
             out=$(python benchmark/ccsd/run_ccsd_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            ;;
+        gradient)
+            out=$(python benchmark/gradient/run_gradient_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            ;;
+        hessian)
+            out=$(python benchmark/hessian/run_hessian_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            ;;
+        frequency)
+            out=$(python benchmark/frequency/run_frequency_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         *) echo "Unknown method: $method"; return 1 ;;
     esac

@@ -78,11 +78,10 @@ def run_one(args):
         mol = psi4.geometry(_xyz_to_psi4_geom(geom_path))
 
     t0 = time.perf_counter()
-    e = psi4.energy("hf", molecule=mol)
+    e, wfn = psi4.energy("hf", molecule=mol, return_wfn=True)
     t1 = time.perf_counter()
 
-    wfn = psi4.core.get_active_wavefunction()
-    nbf = wfn.basisset().nbf() if wfn else 0
+    nbf = wfn.basisset().nbf() if (wfn and hasattr(wfn, "basisset")) else 0
     return {
         "energy": e,
         "elapsed_s": t1 - t0,

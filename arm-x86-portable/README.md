@@ -92,7 +92,7 @@ results/
 | `--project-root` | 便携包上两级 | quantum-psi 项目根 |
 | `--threads` | 1 2 4 8 16 32 | 线程点 |
 | `--repeat` | 5 | 每点重复次数 |
-| `--methods` | scf dft mp2 sapt0 ccsd | benchmark 类型 |
+| `--methods` | scf dft mp2 sapt0 ccsd gradient hessian frequency | benchmark 类型 |
 | `--results-dir` | &lt;project&gt;/results | 结果根目录 |
 
 **generate_report.py**

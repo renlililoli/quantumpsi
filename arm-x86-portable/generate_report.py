@@ -74,7 +74,7 @@ def compute_speedup_efficiency(agg):
 def arm_cores_to_match_x86(agg, x86_baseline_threads=8):
     """For each method: how many ARM cores to match x86 at x86_baseline_threads?"""
     out = {}
-    for method in ["scf", "dft", "mp2", "sapt0", "ccsd"]:
+    for method in ["scf", "dft", "mp2", "sapt0", "ccsd", "gradient", "hessian", "frequency"]:
         x86_threads = sorted(set(k[2] for k in agg if k[0] == "x86" and k[1] == method))
         if not x86_threads:
             continue
@@ -124,7 +124,7 @@ def build_report(agg, speedup_data, arm_match, results_dir):
     lines.append("|----------|--------|---------|----------|---------|---------|------------|")
 
     for plat in ["x86", "arm"]:
-        for method in ["scf", "dft", "mp2", "sapt0", "ccsd"]:
+        for method in ["scf", "dft", "mp2", "sapt0", "ccsd", "gradient", "hessian", "frequency"]:
             for t in sorted(set(k[2] for k in speedup_data if k[0] == plat and k[1] == method)):
                 key = (plat, method, t)
                 if key not in speedup_data:
