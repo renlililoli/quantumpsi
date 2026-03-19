@@ -33,7 +33,7 @@ def parse_args():
     p = argparse.ArgumentParser(description="HF frequency benchmark (analytic Hessian, Python basis wrapper)")
     p.add_argument("--threads", type=int, default=1)
     p.add_argument("--repeat", type=int, default=1)
-    p.add_argument("--basis", default="cc-pvtz", help="Orbital basis set (default: cc-pvtz)")
+    p.add_argument("--basis", default="cc-pvdz", help="Orbital basis set (default: cc-pvdz)")
     p.add_argument("--output-file", default="stdout")
     p.add_argument("--csv-file", default="")
     p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to XYZ/input file")
