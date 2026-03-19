@@ -7,26 +7,18 @@ Use perf to profile: perf record -g -F 99 -- python run_gradient_benchmark.py --
 """
 from __future__ import print_function
 import argparse
+import os
 import sys
 import time
 
-# Benzene monomer (12 atoms), extracted from benzene_dimer.xyz first monomer
-GRADIENT_GEOMETRY = """
-0 1
-C   1.391500   0.000000   0.000000
-C   0.695750   1.205074   0.000000
-C  -0.695750   1.205074   0.000000
-C  -1.391500   0.000000   0.000000
-C  -0.695750  -1.205074   0.000000
-C   0.695750  -1.205074   0.000000
-H   2.471500   0.000000   0.000000
-H   1.235750   2.140382   0.000000
-H  -1.235750   2.140382   0.000000
-H  -2.471500   0.000000   0.000000
-H  -1.235750  -2.140382   0.000000
-H   1.235750  -2.140382   0.000000
-units angstrom
-"""
+# Default: benzene dimer (24 atoms), heavier for gradient timing
+def _xyz_to_psi4_geom(path):
+    """Read XYZ file and return PSI4 geometry string (0 1 + coords + units angstrom)."""
+    with open(path) as f:
+        n = int(f.readline())
+        f.readline()  # skip comment
+        lines = [f.readline() for _ in range(n)]
+    return "0 1\n" + "".join(lines) + "units angstrom\n"
 
 
 def parse_args():
@@ -69,7 +61,13 @@ def run_one(args):
             geom = args.geometry
         mol = psi4.geometry(geom)
     else:
-        mol = psi4.geometry(GRADIENT_GEOMETRY)
+        geom_path = os.path.join(os.path.dirname(__file__), "..", "scf", "cases", "benzene_dimer.xyz")
+        if not os.path.exists(geom_path):
+            raise RuntimeError(
+                "No default geometry. Use --geometry <path> or ensure "
+                "benchmark/scf/cases/benzene_dimer.xyz exists."
+            )
+        mol = psi4.geometry(_xyz_to_psi4_geom(geom_path))
 
     t0 = time.perf_counter()
     grad, wfn = psi4.gradient("hf/{}".format(args.basis.lower()), molecule=mol, dertype=1, return_wfn=True)

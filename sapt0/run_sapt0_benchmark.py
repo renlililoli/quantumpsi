@@ -36,6 +36,7 @@ def parse_args():
     p = argparse.ArgumentParser(description="SAPT0 benchmark (Python basis wrapper)")
     p.add_argument("--threads", type=int, default=1)
     p.add_argument("--repeat", type=int, default=1)
+    p.add_argument("--basis", default="aug-cc-pVTZ", help="Orbital basis set (default: aug-cc-pVTZ)")
     p.add_argument("--output-file", default="stdout")
     p.add_argument("--csv-file", default="")
     p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to input file")
@@ -50,11 +51,11 @@ def run_one(args):
     psi4.set_memory("4 GB")
 
     psi4.set_options({
-        "basis": "aug-cc-pVDZ",
+        "basis": args.basis,
         "scf_type": "df",
         "freeze_core": True,
-        "df_basis_sapt": "aug-cc-pVDZ-RI",
-        "df_basis_scf": "aug-cc-pVDZ-JKFIT",
+        "df_basis_sapt": args.basis.lower() + "-ri",
+        "df_basis_scf": args.basis.lower() + "-jkfit",
         "e_convergence": 1e-8,
         "d_convergence": 1e-8,
     })

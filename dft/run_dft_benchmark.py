@@ -11,7 +11,7 @@ import os
 import sys
 import time
 
-# Default: benzene dimer cc-pVDZ (~300 NBF), same as SCF
+# Default: benzene dimer cc-pVTZ, heavier for multicore scaling
 def _xyz_to_psi4_geom(path):
     """Read XYZ file and return PSI4 geometry string (0 1 + coords + units angstrom)."""
     with open(path) as f:
@@ -27,7 +27,7 @@ def parse_args():
     p.add_argument("--repeat", type=int, default=1)
     p.add_argument("--single-iter", action="store_true",
                    help="Run SCF with maxiter=1 (one iteration) for perf focus")
-    p.add_argument("--basis", default="cc-pVDZ", help="Orbital basis set")
+    p.add_argument("--basis", default="cc-pVTZ", help="Orbital basis set (default: cc-pVTZ)")
     p.add_argument("--output-file", default="stdout")
     p.add_argument("--csv-file", default="")
     p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to XYZ file")

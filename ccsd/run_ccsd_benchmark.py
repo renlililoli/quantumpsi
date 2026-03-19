@@ -34,6 +34,7 @@ def parse_args():
     p = argparse.ArgumentParser(description="DF-CCSD(T) benchmark (Python basis wrapper)")
     p.add_argument("--threads", type=int, default=1)
     p.add_argument("--repeat", type=int, default=1)
+    p.add_argument("--basis", default="cc-pvtz", help="Orbital basis set (default: cc-pvtz)")
     p.add_argument("--single-iter", action="store_true",
                    help="Run CCSD with maxiter=1 (one iteration) for perf focus")
     p.add_argument("--output-file", default="stdout")
@@ -50,9 +51,9 @@ def run_one(args):
     psi4.set_memory("4 GB")
 
     opts = {
-        "basis": "cc-pvdz",
-        "df_basis_scf": "cc-pvdz-jkfit",
-        "df_basis_cc": "cc-pvdz-ri",
+        "basis": args.basis,
+        "df_basis_scf": args.basis.lower() + "-jkfit",
+        "df_basis_cc": args.basis.lower() + "-ri",
         "scf_type": "df",
         "guess": "sad",
         "freeze_core": True,

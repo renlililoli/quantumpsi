@@ -25,7 +25,7 @@ def parse_args():
     p = argparse.ArgumentParser(description="DF-MP2 benchmark (Python basis wrapper)")
     p.add_argument("--threads", type=int, default=1)
     p.add_argument("--repeat", type=int, default=1)
-    p.add_argument("--basis", default="cc-pvtz", help="Orbital basis set (default: cc-pvtz)")
+    p.add_argument("--basis", default="aug-cc-pvtz", help="Orbital basis set (default: aug-cc-pvtz)")
     p.add_argument("--output-file", default="stdout")
     p.add_argument("--csv-file", default="")
     p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to XYZ/input file")
@@ -45,7 +45,7 @@ def run_one(args):
         "df_basis_mp2": args.basis.lower() + "-ri",
         "scf_type": "df",
         "guess": "sad",
-        "freeze_core": True,
+        "freeze_core": False,
     })
 
     if args.geometry:
