@@ -25,6 +25,53 @@ PLATFORM=""
 THREADS="1 2 4 8 16 32"
 REPEAT=5
 METHODS="scf dft mp2 sapt0 ccsd gradient hessian frequency"
+USE_TASKSET=1
+
+# Detect one logical CPU per physical core.
+# Output: space-separated cpu ids, e.g. "0 1 2 ...".
+detect_physical_cores() {
+    local cores
+    cores=$(lscpu -p=CPU,CORE,SOCKET 2>/dev/null | awk -F, '
+        BEGIN { OFS="," }
+        /^#/ { next }
+        {
+            key = $2 ":" $3
+            if (!(key in seen)) {
+                seen[key] = 1
+                print $1
+            }
+        }' | sort -n | tr '\n' ' ')
+    echo "$cores"
+}
+
+# Build a taskset cpulist for t threads from physical cores first.
+build_cpuset_for_threads() {
+    local t=$1
+    local cores=($2)
+    local n=${#cores[@]}
+    local cpuset=""
+
+    if [[ $n -eq 0 ]]; then
+        echo ""
+        return 1
+    fi
+
+    if (( t > n )); then
+        echo "WARN: requested threads=$t > physical_cores=$n, taskset will use first $n physical cores." >&2
+        t=$n
+    fi
+
+    local i
+    for ((i=0; i<t; i++)); do
+        if [[ -z "$cpuset" ]]; then
+            cpuset="${cores[$i]}"
+        else
+            cpuset="${cpuset},${cores[$i]}"
+        fi
+    done
+    echo "$cpuset"
+    return 0
+}
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -34,8 +81,9 @@ while [[ $# -gt 0 ]]; do
         --repeat)       REPEAT="$2";  shift 2 ;;
         --methods)      METHODS="$2"; shift 2 ;;
         --results-dir)  RESULTS_DIR="$2"; shift 2 ;;
+        --no-taskset)   USE_TASKSET=0; shift 1 ;;
         -h|--help)
-            echo "Usage: $0 --platform arm|x86 [--project-root DIR] [--threads \"1 2 4 8\"] [--repeat 5]"
+            echo "Usage: $0 --platform arm|x86 [--project-root DIR] [--threads \"1 2 4 8\"] [--repeat 5] [--no-taskset]"
             exit 0 ;;
         *) echo "Unknown option: $1"; exit 1 ;;
     esac
@@ -76,34 +124,54 @@ RAW_CSV="$OUT_DIR/benchmark_raw.csv"
 
 echo "platform,method,threads,run_idx,elapsed_s,energy" > "$RAW_CSV"
 
+PHYSICAL_CORES="$(detect_physical_cores)"
+if [[ -z "$PHYSICAL_CORES" ]]; then
+    echo "WARN: failed to detect physical cores via lscpu; taskset binding disabled." >&2
+    USE_TASKSET=0
+fi
+
+if [[ "$USE_TASKSET" -eq 1 ]]; then
+    echo "taskset binding enabled (one thread per physical core)" >&2
+fi
+
 run_benchmark() {
     local method=$1 t=$2 run_idx=$3
-    local elapsed energy out err
+    local elapsed energy out err cpuset pycmd
     err=$(mktemp)
+    cpuset=""
+    pycmd="python"
+
+    if [[ "$USE_TASKSET" -eq 1 ]]; then
+        cpuset=$(build_cpuset_for_threads "$t" "$PHYSICAL_CORES" || true)
+        if [[ -n "$cpuset" ]]; then
+            pycmd="taskset -c $cpuset python"
+        fi
+    fi
+
     case $method in
         scf)
-            out=$(python benchmark/scf/run_scf_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            out=$($pycmd benchmark/scf/run_scf_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         dft)
-            out=$(python benchmark/dft/run_dft_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            out=$($pycmd benchmark/dft/run_dft_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         mp2)
-            out=$(python benchmark/mp2/run_mp2_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            out=$($pycmd benchmark/mp2/run_mp2_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         sapt0)
-            out=$(python benchmark/sapt0/run_sapt0_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            out=$($pycmd benchmark/sapt0/run_sapt0_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         ccsd)
-            out=$(python benchmark/ccsd/run_ccsd_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            out=$($pycmd benchmark/ccsd/run_ccsd_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         gradient)
-            out=$(python benchmark/gradient/run_gradient_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            out=$($pycmd benchmark/gradient/run_gradient_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         hessian)
-            out=$(python benchmark/hessian/run_hessian_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            out=$($pycmd benchmark/hessian/run_hessian_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         frequency)
-            out=$(python benchmark/frequency/run_frequency_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
+            out=$($pycmd benchmark/frequency/run_frequency_benchmark.py --threads "$t" --repeat 1 2>"$err" | grep "^run=" || true)
             ;;
         *) echo "Unknown method: $method"; return 1 ;;
     esac
