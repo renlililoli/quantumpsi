@@ -10,21 +10,21 @@ import argparse
 import sys
 import time
 
-# Formic acid dimer (10 atoms) - same as MP2/CCSD
+# Benzene monomer (12 atoms), extracted from benzene_dimer.xyz first monomer
 GRADIENT_GEOMETRY = """
 0 1
-C  -1.888896  -0.179692   0.000000
-O  -1.493280   1.073689   0.000000
-O  -1.170435  -1.166590   0.000000
-H  -2.979488  -0.258829   0.000000
-H  -0.498833   1.107195   0.000000
---
-0 1
-C   1.888896   0.179692   0.000000
-O   1.493280  -1.073689   0.000000
-O   1.170435   1.166590   0.000000
-H   2.979488   0.258829   0.000000
-H   0.498833  -1.107195   0.000000
+C   1.391500   0.000000   0.000000
+C   0.695750   1.205074   0.000000
+C  -0.695750   1.205074   0.000000
+C  -1.391500   0.000000   0.000000
+C  -0.695750  -1.205074   0.000000
+C   0.695750  -1.205074   0.000000
+H   2.471500   0.000000   0.000000
+H   1.235750   2.140382   0.000000
+H  -1.235750   2.140382   0.000000
+H  -2.471500   0.000000   0.000000
+H  -1.235750  -2.140382   0.000000
+H   1.235750  -2.140382   0.000000
 units angstrom
 """
 
@@ -33,9 +33,10 @@ def parse_args():
     p = argparse.ArgumentParser(description="HF gradient benchmark (analytic, Python basis wrapper)")
     p.add_argument("--threads", type=int, default=1)
     p.add_argument("--repeat", type=int, default=1)
+    p.add_argument("--basis", default="cc-pvtz", help="Orbital basis set (default: cc-pvtz)")
     p.add_argument("--output-file", default="stdout")
     p.add_argument("--csv-file", default="")
-    p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to input file")
+    p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to XYZ/input file")
     return p.parse_args()
 
 
@@ -47,8 +48,8 @@ def run_one(args):
     psi4.set_memory("4 GB")
 
     psi4.set_options({
-        "basis": "cc-pvdz",
-        "df_basis_scf": "cc-pvdz-jkfit",
+        "basis": args.basis,
+        "df_basis_scf": args.basis.lower() + "-jkfit",
         "scf_type": "df",
         "guess": "sad",
     })
@@ -56,7 +57,14 @@ def run_one(args):
     if args.geometry:
         try:
             with open(args.geometry) as f:
-                geom = f.read()
+                first = f.readline()
+                try:
+                    n = int(first)
+                    f.readline()  # skip comment/charge line
+                    lines = [f.readline() for _ in range(n)]
+                    geom = "0 1\n" + "".join(lines) + "units angstrom\n"
+                except ValueError:
+                    geom = first + f.read()
         except OSError:
             geom = args.geometry
         mol = psi4.geometry(geom)
@@ -64,7 +72,7 @@ def run_one(args):
         mol = psi4.geometry(GRADIENT_GEOMETRY)
 
     t0 = time.perf_counter()
-    grad, wfn = psi4.gradient("hf/cc-pvdz", molecule=mol, dertype=1, return_wfn=True)
+    grad, wfn = psi4.gradient("hf/{}".format(args.basis.lower()), molecule=mol, dertype=1, return_wfn=True)
     t1 = time.perf_counter()
 
     e = wfn.energy() if wfn else 0.0

@@ -10,12 +10,22 @@ import argparse
 import sys
 import time
 
-# H2O (3 atoms) - Hessian is expensive, small molecule for manageable time
+# Formic acid dimer (10 atoms), heavier default for 6226R-level timing
 HESSIAN_GEOMETRY = """
 0 1
-O
-H 1 0.958
-H 1 0.958 2 104.5
+C  -1.888896  -0.179692   0.000000
+O  -1.493280   1.073689   0.000000
+O  -1.170435  -1.166590   0.000000
+H  -2.979488  -0.258829   0.000000
+H  -0.498833   1.107195   0.000000
+--
+0 1
+C   1.888896   0.179692   0.000000
+O   1.493280  -1.073689   0.000000
+O   1.170435   1.166590   0.000000
+H   2.979488   0.258829   0.000000
+H   0.498833  -1.107195   0.000000
+units angstrom
 """
 
 
@@ -23,9 +33,10 @@ def parse_args():
     p = argparse.ArgumentParser(description="HF Hessian benchmark (analytic, Python basis wrapper)")
     p.add_argument("--threads", type=int, default=1)
     p.add_argument("--repeat", type=int, default=1)
+    p.add_argument("--basis", default="cc-pvtz", help="Orbital basis set (default: cc-pvtz)")
     p.add_argument("--output-file", default="stdout")
     p.add_argument("--csv-file", default="")
-    p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to input file")
+    p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to XYZ/input file")
     return p.parse_args()
 
 
@@ -37,16 +48,23 @@ def run_one(args):
     psi4.set_memory("4 GB")
 
     psi4.set_options({
-        "basis": "cc-pvdz",
+        "basis": args.basis,
         "scf_type": "df",
-        "df_basis_scf": "cc-pvdz-jkfit",
+        "df_basis_scf": args.basis.lower() + "-jkfit",
         "guess": "sad",
     })
 
     if args.geometry:
         try:
             with open(args.geometry) as f:
-                geom = f.read()
+                first = f.readline()
+                try:
+                    n = int(first)
+                    f.readline()  # skip comment/charge line
+                    lines = [f.readline() for _ in range(n)]
+                    geom = "0 1\n" + "".join(lines) + "units angstrom\n"
+                except ValueError:
+                    geom = first + f.read()
         except OSError:
             geom = args.geometry
         mol = psi4.geometry(geom)
@@ -54,7 +72,7 @@ def run_one(args):
         mol = psi4.geometry(HESSIAN_GEOMETRY)
 
     t0 = time.perf_counter()
-    hess, wfn = psi4.hessian("hf/cc-pvdz", molecule=mol, dertype=2, return_wfn=True)
+    hess, wfn = psi4.hessian("hf/{}".format(args.basis.lower()), molecule=mol, dertype=2, return_wfn=True)
     t1 = time.perf_counter()
 
     e = wfn.energy() if wfn else 0.0

@@ -7,36 +7,28 @@ Use perf to profile: perf record -g -F 99 -- python run_mp2_benchmark.py --threa
 """
 from __future__ import print_function
 import argparse
+import os
 import sys
 import time
 
-# Formic acid dimer (10 atoms) - same as CCSD, suitable for 6226R-level CPU
-# From psi4/tests/dfmp2-1
-MP2_GEOMETRY = """
-0 1
-C  -1.888896  -0.179692   0.000000
-O  -1.493280   1.073689   0.000000
-O  -1.170435  -1.166590   0.000000
-H  -2.979488  -0.258829   0.000000
-H  -0.498833   1.107195   0.000000
---
-0 1
-C   1.888896   0.179692   0.000000
-O   1.493280  -1.073689   0.000000
-O   1.170435   1.166590   0.000000
-H   2.979488   0.258829   0.000000
-H   0.498833  -1.107195   0.000000
-units angstrom
-"""
+# Default: benzene dimer (24 atoms) from benchmark/scf/cases/benzene_dimer.xyz
+def _xyz_to_psi4_geom(path):
+    """Read XYZ file and return PSI4 geometry string (0 1 + coords + units angstrom)."""
+    with open(path) as f:
+        n = int(f.readline())
+        f.readline()  # skip comment
+        lines = [f.readline() for _ in range(n)]
+    return "0 1\n" + "".join(lines) + "units angstrom\n"
 
 
 def parse_args():
     p = argparse.ArgumentParser(description="DF-MP2 benchmark (Python basis wrapper)")
     p.add_argument("--threads", type=int, default=1)
     p.add_argument("--repeat", type=int, default=1)
+    p.add_argument("--basis", default="cc-pvtz", help="Orbital basis set (default: cc-pvtz)")
     p.add_argument("--output-file", default="stdout")
     p.add_argument("--csv-file", default="")
-    p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to input file")
+    p.add_argument("--geometry", default=None, help="PSI4 geometry string or path to XYZ/input file")
     return p.parse_args()
 
 
@@ -48,9 +40,9 @@ def run_one(args):
     psi4.set_memory("4 GB")
 
     psi4.set_options({
-        "basis": "cc-pvdz",
-        "df_basis_scf": "cc-pvdz-jkfit",
-        "df_basis_mp2": "cc-pvdz-ri",
+        "basis": args.basis,
+        "df_basis_scf": args.basis.lower() + "-jkfit",
+        "df_basis_mp2": args.basis.lower() + "-ri",
         "scf_type": "df",
         "guess": "sad",
         "freeze_core": True,
@@ -59,12 +51,25 @@ def run_one(args):
     if args.geometry:
         try:
             with open(args.geometry) as f:
-                geom = f.read()
+                first = f.readline()
+                try:
+                    n = int(first)
+                    f.readline()  # skip comment/charge line
+                    lines = [f.readline() for _ in range(n)]
+                    geom = "0 1\n" + "".join(lines) + "units angstrom\n"
+                except ValueError:
+                    geom = first + f.read()
         except OSError:
             geom = args.geometry
         mol = psi4.geometry(geom)
     else:
-        mol = psi4.geometry(MP2_GEOMETRY)
+        geom_path = os.path.join(os.path.dirname(__file__), "..", "scf", "cases", "benzene_dimer.xyz")
+        if not os.path.exists(geom_path):
+            raise RuntimeError(
+                "No default geometry. Use --geometry <path> or ensure "
+                "benchmark/scf/cases/benzene_dimer.xyz exists."
+            )
+        mol = psi4.geometry(_xyz_to_psi4_geom(geom_path))
 
     t0 = time.perf_counter()
     e = psi4.energy("mp2", molecule=mol)
