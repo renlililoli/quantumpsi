@@ -1,0 +1,324 @@
+Start testing: Apr 04 16:09 CST
+----------------------------------------------------------
+501/517 Testing: python-pubchem
+501/517 Test: python-pubchem
+Command: "/home/share/WUCHAO/yingzhouli/testuser/venv/bin/python3.9" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/runtest.py" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/python/pubchem/input.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/testresults.log" "/home/share/WUCHAO/yingzhouli/testuser/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/python/python-pubchem/output.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/bin/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/share/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/"
+Directory: /home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/python/python-pubchem
+"python-pubchem" start time: Apr 04 16:09 CST
+Output:
+----------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/lib64/python3.9/urllib/request.py", line 1346, in do_open
+    h.request(req.get_method(), req.selector, req.data, headers,
+  File "/usr/lib64/python3.9/http/client.py", line 1285, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/lib64/python3.9/http/client.py", line 1331, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/lib64/python3.9/http/client.py", line 1280, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/lib64/python3.9/http/client.py", line 1040, in _send_output
+    self.send(msg)
+  File "/usr/lib64/python3.9/http/client.py", line 980, in send
+    self.connect()
+  File "/usr/lib64/python3.9/http/client.py", line 1447, in connect
+    super().connect()
+  File "/usr/lib64/python3.9/http/client.py", line 956, in connect
+    self._tunnel()
+  File "/usr/lib64/python3.9/http/client.py", line 926, in _tunnel
+    (version, code, message) = response._read_status()
+  File "/usr/lib64/python3.9/http/client.py", line 289, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/pubchem.py", line 153, in get_pubchem_results
+    response = urlopen(url)
+  File "/usr/lib64/python3.9/urllib/request.py", line 214, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib64/python3.9/urllib/request.py", line 517, in open
+    response = self._open(req, data)
+  File "/usr/lib64/python3.9/urllib/request.py", line 534, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+  File "/usr/lib64/python3.9/urllib/request.py", line 494, in _call_chain
+    result = func(*args)
+  File "/usr/lib64/python3.9/urllib/request.py", line 1389, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+  File "/usr/lib64/python3.9/urllib/request.py", line 1349, in do_open
+    raise URLError(err)
+urllib.error.URLError: <urlopen error Remote end closed connection without response>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 322, in process_pubchem
+    results = pubchem.get_pubchem_results(pubsearch)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/pubchem.py", line 156, in get_pubchem_results
+    raise ValidationError(
+qcelemental.exceptions.ValidationError: 	PubchemError
+<urlopen error Remote end closed connection without response>
+	received when trying to open
+	https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/benzene/property/IUPACName,MolecularFormula,Charge/JSON?name_type=complete
+	Check your internet connection, and the above URL, and try again.
+
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/python/pubchem/input.py", line 8, in <module>
+    benz = psi4.geometry("""
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/psi4/driver/molutil.py", line 265, in geometry
+    molrec = qcel.molparse.from_string(
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 236, in from_string
+    molstr, molinit = parse_as_psi4_ish(molstr, unsettled=False)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 201, in parse_as_psi4_ish
+    molstr, processed = _filter_pubchem(molstr)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 357, in _filter_pubchem
+    line = re.sub(pubchemre, process_pubchem, line.strip())
+  File "/usr/lib64/python3.9/re.py", line 210, in sub
+    return _compile(pattern, flags).sub(repl, string, count)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 324, in process_pubchem
+    raise ValidationError(e.message)
+qcelemental.exceptions.ValidationError: Input Error: 	PubchemError
+<urlopen error Remote end closed connection without response>
+	received when trying to open
+	https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/benzene/property/IUPACName,MolecularFormula,Charge/JSON?name_type=complete
+	Check your internet connection, and the above URL, and try again.
+
+	Searching PubChem database for benzene (single best match returned)
+Exit Status: overall (1)
+<end of output>
+Test time =   4.78 sec
+----------------------------------------------------------
+Test Failed.
+"python-pubchem" end time: Apr 04 16:09 CST
+"python-pubchem" time elapsed: 00:00:04
+----------------------------------------------------------
+
+367/517 Testing: pubchem2
+367/517 Test: pubchem2
+Command: "/home/share/WUCHAO/yingzhouli/testuser/venv/bin/python3.9" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/runtest.py" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/pubchem2/input.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/testresults.log" "/home/share/WUCHAO/yingzhouli/testuser/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/pubchem2/output.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/bin/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/share/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/"
+Directory: /home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/pubchem2
+"pubchem2" start time: Apr 04 16:09 CST
+Output:
+----------------------------------------------------------
+	Searching PubChem database for CID 608116
+Traceback (most recent call last):
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/bin/psi4", line 387, in <module>
+    exec(content)
+  File "<string>", line 54, in <module>
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/psi4/driver/molutil.py", line 265, in geometry
+    molrec = qcel.molparse.from_string(
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 236, in from_string
+    molstr, molinit = parse_as_psi4_ish(molstr, unsettled=False)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 201, in parse_as_psi4_ish
+    molstr, processed = _filter_pubchem(molstr)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 357, in _filter_pubchem
+    line = re.sub(pubchemre, process_pubchem, line.strip())
+  File "/usr/lib64/python3.9/re.py", line 210, in sub
+    return _compile(pattern, flags).sub(repl, string, count)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 324, in process_pubchem
+    raise ValidationError(e.message)
+
+qcelemental.exceptions.ValidationError: Input Error: 	PubchemError
+<urlopen error Remote end closed connection without response>
+	received when trying to open
+	https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/608116/property/IUPACName,MolecularFormula,Charge/JSON
+	Check your internet connection, and the above URL, and try again.
+
+
+Printing out the relevant lines from the Psithon --> Python processed input file:
+    H   4.695300  -2.032200   1.103200
+    ""","pubchem")
+    core.IO.set_default_namespace("pubchem")
+    pubchem.update_geometry()
+    nre = pubchem.nuclear_repulsion_energy() 
+--> pubchem2 = geometry("""
+       
+        pubchem:608116
+    ""","pubchem2")
+    core.IO.set_default_namespace("pubchem2")
+    pubchem2.update_geometry()
+
+
+!----------------------------------------------------------------------------------!
+!                                                                                  !
+!  Input Error:   PubchemError                                                     !
+! <urlopen error Remote end closed connection without response>                    !
+!         received when trying to open                                             !
+!         https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/608116/property/I !
+!     UPACName,MolecularFormula,Charge/JSON                                        !
+!         Check your internet connection, and the above URL, and try again.        !
+!                                                                                  !
+!----------------------------------------------------------------------------------!
+
+Exit Status: overall (1)
+<end of output>
+Test time =   4.82 sec
+----------------------------------------------------------
+Test Failed.
+"pubchem2" end time: Apr 04 16:09 CST
+"pubchem2" time elapsed: 00:00:04
+----------------------------------------------------------
+
+366/517 Testing: pubchem1
+366/517 Test: pubchem1
+Command: "/home/share/WUCHAO/yingzhouli/testuser/venv/bin/python3.9" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/runtest.py" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/pubchem1/input.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/testresults.log" "/home/share/WUCHAO/yingzhouli/testuser/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/pubchem1/output.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/bin/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/share/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/"
+Directory: /home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/pubchem1
+"pubchem1" start time: Apr 04 16:09 CST
+Output:
+----------------------------------------------------------
+	Searching PubChem database for benzene (single best match returned)
+Traceback (most recent call last):
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/bin/psi4", line 387, in <module>
+    exec(content)
+  File "<string>", line 19, in <module>
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/psi4/driver/molutil.py", line 265, in geometry
+    molrec = qcel.molparse.from_string(
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 236, in from_string
+    molstr, molinit = parse_as_psi4_ish(molstr, unsettled=False)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 201, in parse_as_psi4_ish
+    molstr, processed = _filter_pubchem(molstr)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 357, in _filter_pubchem
+    line = re.sub(pubchemre, process_pubchem, line.strip())
+  File "/usr/lib64/python3.9/re.py", line 210, in sub
+    return _compile(pattern, flags).sub(repl, string, count)
+  File "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/qcelemental/molparse/from_string.py", line 324, in process_pubchem
+    raise ValidationError(e.message)
+
+qcelemental.exceptions.ValidationError: Input Error: 	PubchemError
+<urlopen error Remote end closed connection without response>
+	received when trying to open
+	https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/benzene/property/IUPACName,MolecularFormula,Charge/JSON?name_type=complete
+	Check your internet connection, and the above URL, and try again.
+
+
+Printing out the relevant lines from the Psithon --> Python processed input file:
+    0 1
+    H 0 0 0
+    H 0.74 0 0
+    ""","blank_molecule_psi4_yo")
+    
+--> benz = geometry("""
+        pubchem:benzene
+    ""","benz")
+    core.IO.set_default_namespace("benz")
+    core.set_global_option("BASIS", "sto-3g")
+    core.set_global_option("REFERENCE", "rhf")
+
+
+!----------------------------------------------------------------------------------!
+!                                                                                  !
+!  Input Error:   PubchemError                                                     !
+! <urlopen error Remote end closed connection without response>                    !
+!         received when trying to open                                             !
+!         https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/benzene/property !
+!     /IUPACName,MolecularFormula,Charge/JSON?name_type=complete                   !
+!         Check your internet connection, and the above URL, and try again.        !
+!                                                                                  !
+!----------------------------------------------------------------------------------!
+
+Exit Status: overall (1)
+<end of output>
+Test time =   5.11 sec
+----------------------------------------------------------
+Test Failed.
+"pubchem1" end time: Apr 04 16:09 CST
+"pubchem1" time elapsed: 00:00:05
+----------------------------------------------------------
+
+466/517 Testing: pywrap-align
+466/517 Test: pywrap-align
+Command: "/home/share/WUCHAO/yingzhouli/testuser/venv/bin/python3.9" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/runtest.py" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/pywrap-align/input.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/testresults.log" "/home/share/WUCHAO/yingzhouli/testuser/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/pywrap-align/output.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/bin/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/share/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/"
+Directory: /home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/pywrap-align
+"pywrap-align" start time: Apr 04 16:09 CST
+Output:
+----------------------------------------------------------
+networkx backend defined more than once: nx-loopback
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    mirror allowed....................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    mirror allowed....................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    mirror allowed....................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    mirror allowed....................................................PASSED
+    Q: concern_mol-->returned_mol geometry matches ref_mol............PASSED
+    shifts equiv......................................................PASSED
+    mirror allowed....................................................PASSED
+    cs<-->c2v tropolones align............................................................PASSED
+    known rmsd Mol.B787...............................................PASSED
+    known rmsd B787...................................................PASSED
+Exit Status: overall (0)
+<end of output>
+Test time =  13.49 sec
+----------------------------------------------------------
+Test Passed.
+"pywrap-align" end time: Apr 04 16:10 CST
+"pywrap-align" time elapsed: 00:00:13
+----------------------------------------------------------
+
+467/517 Testing: pywrap-align-chiral
+467/517 Test: pywrap-align-chiral
+Command: "/home/share/WUCHAO/yingzhouli/testuser/venv/bin/python3.9" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/runtest.py" "/home/share/WUCHAO/yingzhouli/testuser/psi4/tests/pywrap-align-chiral/input.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/testresults.log" "/home/share/WUCHAO/yingzhouli/testuser/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/pywrap-align-chiral/output.dat" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/bin/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/share/psi4" "/home/share/WUCHAO/yingzhouli/testuser/psi4/build/stage/lib/"
+Directory: /home/share/WUCHAO/yingzhouli/testuser/psi4/build/tests/pywrap-align-chiral
+"pywrap-align-chiral" start time: Apr 04 16:09 CST
+Output:
+----------------------------------------------------------
+networkx backend defined more than once: nx-loopback
+    bromochlorofluoromethane R, S.........................................................PASSED
+    bromochlorofluoromethane R, S enantiomers.............................................PASSED
+    2-chloro-3-bromobutane RR, SS.........................................................PASSED
+    2-chloro-3-bromobutane RR, SS enantiomers.............................................PASSED
+    2-chloro-3-bromobutane RR, SR.........................................................PASSED
+    2-chloro-3-bromobutane RR, RS.........................................................PASSED
+    2-chloro-3-bromobutane RS, SR.........................................................PASSED
+    2-chloro-3-bromobutane RS, SR enantiomers.............................................PASSED
+    2,3-dibromobutane RR, RS..............................................................PASSED
+    2,3-dibromobutane RR, SS..............................................................PASSED
+    2,3-dibromobutane RR, SS enantiomers..................................................PASSED
+    2,3-dibromobutane SS, RS..............................................................PASSED
+    2,3-dibromobutane SR, RS (force non-mirror)...........................................PASSED
+    2,3-dibromobutane SR, RS identical (force non-mirror).................................PASSED
+    2,3-dibromobutane SR, RS..............................................................PASSED
+    2,3-dibromobutane SR, RS identical....................................................PASSED
+Exit Status: overall (0)
+<end of output>
+Test time =  14.64 sec
+----------------------------------------------------------
+Test Passed.
+"pywrap-align-chiral" end time: Apr 04 16:10 CST
+"pywrap-align-chiral" time elapsed: 00:00:14
+----------------------------------------------------------
+
+End testing: Apr 04 16:10 CST
+
+cart =  42.85 sec*proc
+
+minitests =   4.78 sec*proc
+
+misc =   9.93 sec*proc
+
+psi =  42.85 sec*proc
+
+python =   4.78 sec*proc
+
+quicktests =  28.13 sec*proc
+

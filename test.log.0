@@ -1,0 +1,1134 @@
+nohup: ignoring input
+Test project /home/share/WUCHAO/yingzhouli/testuser/psi4/build
+        Start 298: nbody-convergence
+        Start 230: fd-freq-energy-large
+        Start 299: nbody-freq
+        Start 484: linK-2
+        Start 125: density-screen-2
+        Start 208: fsapt1
+        Start 216: isapt1
+        Start  17: cbs-xtpl-func
+        Start 211: fsapt-allterms
+        Start 232: fd-freq-gradient-large
+        Start 341: opt13
+        Start  26: cc13a
+        Start 117: dct7
+        Start 246: frac-traverse
+        Start 386: sapt2
+        Start 388: sapt4
+        Start 400: scf-bz2
+        Start 485: linK-3
+        Start   1: aediis-1
+        Start   2: casscf-fzc-sp
+        Start   3: casscf-semi
+        Start   4: casscf-sa-sp
+        Start   5: ao-casscf-sp
+        Start   6: casscf-sp
+        Start   7: castup1
+        Start   8: castup2
+        Start   9: castup3
+        Start  10: cbs-delta-energy
+        Start  11: cbs-parser
+        Start  12: cbs-xtpl-alpha
+        Start  13: cbs-xtpl-energy
+        Start  14: cbs-xtpl-freq
+        Start  15: cbs-xtpl-gradient
+        Start  16: cbs-xtpl-opt
+        Start  18: cbs-xtpl-nbody
+        Start  19: cbs-xtpl-wrapper
+        Start  20: cbs-xtpl-dict
+        Start  21: cc1
+        Start  22: cc10
+        Start  23: cc11
+        Start  24: cc12
+        Start  25: cc13
+        Start  27: cc13b
+        Start  28: cc13c
+        Start  29: cc13d
+        Start  30: cc14
+        Start  31: cc15
+        Start  32: cc16
+        Start  33: cc17
+        Start  34: cc18
+        Start  35: cc19
+        Start  36: cc2
+        Start  37: cc21
+        Start  38: cc22
+        Start  39: cc23
+        Start  40: cc24
+        Start  41: cc25
+        Start  42: cc26
+        Start  43: cc27
+        Start  44: cc28
+        Start  45: cc29
+        Start  46: cc3
+        Start  47: cc30
+        Start  48: cc31
+  1/517 Test   #1: aediis-1 .........................   Passed   10.87 sec
+        Start  49: cc32
+  2/517 Test   #7: castup1 ..........................   Passed   11.52 sec
+        Start  50: cc33
+  3/517 Test   #5: ao-casscf-sp .....................   Passed   12.71 sec
+        Start  51: cc34
+  4/517 Test   #3: casscf-semi ......................   Passed   14.02 sec
+        Start  52: cc35
+  5/517 Test   #9: castup3 ..........................   Passed   15.96 sec
+        Start  53: cc36
+  6/517 Test   #8: castup2 ..........................   Passed   17.06 sec
+        Start  54: cc37
+  7/517 Test   #2: casscf-fzc-sp ....................   Passed   19.49 sec
+        Start  55: cc38
+  8/517 Test  #38: cc22 .............................   Passed   21.77 sec
+        Start  56: cc39
+  9/517 Test  #24: cc12 .............................   Passed   23.11 sec
+        Start  57: cc4
+ 10/517 Test   #6: casscf-sp ........................   Passed   23.53 sec
+        Start  58: cc40
+ 11/517 Test   #4: casscf-sa-sp .....................   Passed   24.80 sec
+        Start  59: cc41
+ 12/517 Test  #22: cc10 .............................   Passed   25.66 sec
+        Start  60: cc42
+ 13/517 Test  #33: cc17 .............................   Passed   26.09 sec
+        Start  61: cc43
+ 14/517 Test  #23: cc11 .............................   Passed   26.22 sec
+        Start  62: cc44
+ 15/517 Test  #49: cc32 .............................   Passed   16.45 sec
+        Start  63: cc45
+ 16/517 Test  #34: cc18 .............................   Passed   28.54 sec
+        Start  64: cc46
+ 17/517 Test  #51: cc34 .............................   Passed   18.46 sec
+        Start  65: cc47
+ 18/517 Test  #50: cc33 .............................   Passed   20.83 sec
+        Start  66: cc48
+ 19/517 Test  #54: cc37 .............................   Passed   16.68 sec
+        Start  67: cc49
+ 20/517 Test  #13: cbs-xtpl-energy ..................   Passed   33.91 sec
+        Start  68: cc4a
+ 21/517 Test  #53: cc36 .............................   Passed   19.11 sec
+        Start  69: cc50
+ 22/517 Test  #35: cc19 .............................   Passed   36.95 sec
+        Start  70: cc51
+ 23/517 Test  #52: cc35 .............................   Passed   26.04 sec
+        Start  71: cc52
+ 24/517 Test  #55: cc38 .............................   Passed   21.79 sec
+        Start  72: cc53
+ 25/517 Test  #47: cc30 .............................   Passed   42.04 sec
+        Start  73: cc54
+ 26/517 Test  #27: cc13b ............................   Passed   46.52 sec
+        Start  74: cc55
+ 27/517 Test  #63: cc45 .............................   Passed   20.28 sec
+        Start  75: cc56
+ 28/517 Test  #56: cc39 .............................   Passed   27.03 sec
+        Start  76: cc5
+ 29/517 Test  #44: cc28 .............................   Passed   48.89 sec
+        Start  77: cc6
+ 30/517 Test  #15: cbs-xtpl-gradient ................   Passed   50.99 sec
+        Start  78: cc7
+ 31/517 Test  #11: cbs-parser .......................   Passed   52.46 sec
+        Start  79: cc8
+ 32/517 Test  #57: cc4 ..............................   Passed   29.47 sec
+        Start  80: cc8a
+ 33/517 Test  #31: cc15 .............................   Passed   52.56 sec
+        Start  81: cc8b
+ 34/517 Test  #21: cc1 ..............................   Passed   54.75 sec
+        Start  82: cc8c
+ 35/517 Test  #28: cc13c ............................   Passed   56.37 sec
+        Start  83: cc9
+ 36/517 Test  #60: cc42 .............................   Passed   32.74 sec
+        Start  84: cc9a
+ 37/517 Test  #18: cbs-xtpl-nbody ...................   Passed   58.69 sec
+        Start  85: cdomp2-1
+ 38/517 Test #117: dct7 .............................   Passed   59.96 sec
+        Start  86: cdomp2-2
+ 39/517 Test  #64: cc46 .............................   Passed   32.75 sec
+        Start  87: cdoremp-energy1
+ 40/517 Test  #68: cc4a .............................   Passed   28.04 sec
+        Start  88: cdoremp-energy2
+ 41/517 Test  #65: cc47 .............................   Passed   31.05 sec
+        Start  89: cdremp-1
+ 42/517 Test  #14: cbs-xtpl-freq ....................   Passed   64.75 sec
+        Start  90: cdremp-2
+ 43/517 Test  #20: cbs-xtpl-dict ....................   Passed   64.73 sec
+        Start  91: cepa1
+ 44/517 Test  #73: cc54 .............................   Passed   22.54 sec
+        Start  92: cepa2
+ 45/517 Test  #58: cc40 .............................   Passed   43.57 sec
+        Start  93: cepa3
+ 46/517 Test  #69: cc50 .............................   Passed   33.38 sec
+        Start  94: cepa-module
+ 47/517 Test  #72: cc53 .............................   Passed   29.41 sec
+        Start  95: ci-multi
+ 48/517 Test  #67: cc49 .............................   Passed   37.63 sec
+        Start  96: cisd-h2o+-0
+ 49/517 Test  #48: cc31 .............................   Passed   75.17 sec
+        Start  97: cisd-h2o+-1
+ 50/517 Test  #66: cc48 .............................   Passed   44.25 sec
+        Start  98: cisd-h2o+-2
+ 51/517 Test  #61: cc43 .............................   Passed   50.82 sec
+        Start  99: cisd-h2o-clpse
+ 52/517 Test  #81: cc8b .............................   Passed   25.60 sec
+        Start 100: cisd-opt-fd
+ 53/517 Test  #82: cc8c .............................   Passed   23.78 sec
+        Start 101: cisd-sp
+ 54/517 Test  #32: cc16 .............................   Passed   78.97 sec
+        Start 102: cisd-sp-2
+ 55/517 Test  #91: cepa1 ............................   Passed   14.50 sec
+        Start 103: ci-property
+ 56/517 Test  #62: cc44 .............................   Passed   53.02 sec
+        Start 104: cubeprop
+ 57/517 Test  #75: cc56 .............................   Passed   32.55 sec
+        Start 105: cubeprop-frontier
+ 58/517 Test  #74: cc55 .............................   Passed   34.22 sec
+        Start 106: decontract
+ 59/517 Test  #92: cepa2 ............................   Passed   15.93 sec
+        Start 107: dct-grad1
+ 60/517 Test  #85: cdomp2-1 .........................   Passed   22.38 sec
+        Start 108: dct-grad2
+ 61/517 Test  #79: cc8 ..............................   Passed   29.13 sec
+        Start 109: dct-grad3
+ 62/517 Test  #96: cisd-h2o+-0 ......................   Passed   10.29 sec
+        Start 110: dct-grad4
+ 63/517 Test  #80: cc8a .............................   Passed   30.08 sec
+        Start 111: dct1
+ 64/517 Test  #93: cepa3 ............................   Passed   16.48 sec
+        Start 112: dct2
+ 65/517 Test  #59: cc41 .............................   Passed   59.34 sec
+        Start 113: dct3
+ 66/517 Test  #99: cisd-h2o-clpse ...................   Passed    9.35 sec
+        Start 114: dct4
+ 67/517 Test  #97: cisd-h2o+-1 ......................   Passed   11.53 sec
+        Start 115: dct5
+ 68/517 Test  #98: cisd-h2o+-2 ......................   Passed   11.15 sec
+        Start 116: dct6
+ 69/517 Test  #84: cc9a .............................   Passed   30.23 sec
+        Start 118: dct8
+ 70/517 Test  #83: cc9 ..............................   Passed   32.70 sec
+        Start 119: dct9
+ 71/517 Test #106: decontract .......................   Passed    8.89 sec
+        Start 120: dct10
+ 72/517 Test  #19: cbs-xtpl-wrapper .................   Passed   90.53 sec
+        Start 121: dct11
+ 73/517 Test #102: cisd-sp-2 ........................   Passed   12.00 sec
+        Start 122: dct12
+ 74/517 Test #105: cubeprop-frontier ................   Passed   11.15 sec
+        Start 123: ao-dfcasscf-sp
+ 75/517 Test  #70: cc51 .............................   Passed   54.52 sec
+        Start 124: density-screen-1
+ 76/517 Test #112: dct2 .............................   Passed    9.77 sec
+        Start 126: dfcasscf-sa-sp
+ 77/517 Test #101: cisd-sp ..........................   Passed   16.34 sec
+        Start 127: dfcasscf-fzc-sp
+ 78/517 Test  #45: cc29 .............................   Passed   95.10 sec
+        Start 128: dfcasscf-sp
+ 79/517 Test #122: dct12 ............................   Passed    8.44 sec
+        Start 129: dfccd1
+ 80/517 Test #104: cubeprop .........................   Passed   20.44 sec
+        Start 130: dfccdl1
+ 81/517 Test  #76: cc5 ..............................   Passed   51.40 sec
+        Start 131: dfccd-grad1
+ 82/517 Test #124: density-screen-1 .................   Passed    9.48 sec
+        Start 132: dfccsd1
+ 83/517 Test #109: dct-grad3 ........................   Passed   19.60 sec
+        Start 133: dfccsdl1
+ 84/517 Test #123: ao-dfcasscf-sp ...................   Passed   10.21 sec
+        Start 134: dfccsd-grad1
+ 85/517 Test #386: sapt2 ............................   Passed  103.54 sec
+        Start 135: dfccsd-t-grad1
+ 86/517 Test #113: dct3 .............................   Passed   20.15 sec
+        Start 136: dfccsdt1
+ 87/517 Test #128: dfcasscf-sp ......................   Passed    9.30 sec
+        Start 137: dfccsdat1
+ 88/517 Test #126: dfcasscf-sa-sp ...................   Passed   12.29 sec
+        Start 138: dfmp2-1
+ 89/517 Test #127: dfcasscf-fzc-sp ..................   Passed   10.75 sec
+        Start 139: dfmp2-2
+ 90/517 Test  #95: ci-multi .........................   Passed   35.16 sec
+        Start 140: dfmp2-3
+ 91/517 Test #130: dfccdl1 ..........................   Passed   11.40 sec
+        Start 141: dfmp2-4
+ 92/517 Test #110: dct-grad4 ........................   Passed   30.05 sec
+        Start 142: dfmp2-5
+ 93/517 Test #129: dfccd1 ...........................   Passed   12.12 sec
+        Start 143: dfmp2-fc
+ 94/517 Test  #77: cc6 ..............................   Passed   62.89 sec
+        Start 144: dfmp2-freq1
+ 95/517 Test  #86: cdomp2-2 .........................   Passed   53.19 sec
+        Start 145: dfmp2-freq2
+ 96/517 Test #132: dfccsd1 ..........................   Passed   13.21 sec
+        Start 146: dfccsd-grad2
+ 97/517 Test #485: linK-3 ...........................   Passed  115.25 sec
+        Start 147: dfccsd-t-grad2
+ 98/517 Test #131: dfccd-grad1 ......................   Passed   14.73 sec
+        Start 148: dfccsdat2
+ 99/517 Test #139: dfmp2-2 ..........................   Passed   10.03 sec
+        Start 149: dfccsdt2
+100/517 Test #133: dfccsdl1 .........................   Passed   14.67 sec
+        Start 150: dfmp2-grad1
+101/517 Test #111: dct1 .............................   Passed   34.90 sec
+        Start 151: dfmp2-grad2
+102/517 Test #136: dfccsdt1 .........................   Passed   15.28 sec
+        Start 152: dfmp2-grad3
+103/517 Test #142: dfmp2-5 ..........................   Passed    8.33 sec
+        Start 153: dfmp2-grad4
+104/517 Test #116: dct6 .............................   Passed   34.96 sec
+        Start 154: dfmp2-grad5
+105/517 Test #134: dfccsd-grad1 .....................   Passed   23.30 sec
+        Start 155: dfomp2-1
+106/517 Test  #16: cbs-xtpl-opt .....................   Passed  125.04 sec
+        Start 156: dfomp2-2
+107/517 Test #150: dfmp2-grad1 ......................   Passed   10.03 sec
+        Start 157: dfomp2-3
+108/517 Test  #29: cc13d ............................   Passed  126.16 sec
+        Start 158: dfomp2-4
+109/517 Test #137: dfccsdat1 ........................   Passed   21.63 sec
+        Start 159: dfomp2-grad1
+110/517 Test #141: dfmp2-4 ..........................   Passed   15.65 sec
+        Start 160: dfomp2-grad2
+111/517 Test #121: dct11 ............................   Passed   36.91 sec
+        Start 161: dfomp2-grad3
+112/517 Test  #71: cc52 .............................   Passed   88.17 sec
+        Start 162: dfomp3-1
+113/517 Test  #90: cdremp-2 .........................   Passed   63.63 sec
+        Start 163: dfomp3-2
+114/517 Test #108: dct-grad2 ........................   Passed   47.77 sec
+        Start 164: dfomp3-grad1
+115/517 Test #151: dfmp2-grad2 ......................   Passed   11.64 sec
+        Start 165: dfomp3-grad2
+116/517 Test #152: dfmp2-grad3 ......................   Passed   10.62 sec
+        Start 166: dfomp2p5-1
+117/517 Test #135: dfccsd-t-grad1 ...................   Passed   27.13 sec
+        Start 167: dfomp2p5-2
+118/517 Test  #94: cepa-module ......................   Passed   62.27 sec
+        Start 168: dfomp2p5-grad1
+119/517 Test #140: dfmp2-3 ..........................   Passed   25.14 sec
+        Start 169: dforemp-grad1
+120/517 Test #153: dfmp2-grad4 ......................   Passed   12.04 sec
+        Start 170: dforemp-grad2
+121/517 Test  #10: cbs-delta-energy .................   Passed  137.97 sec
+        Start 171: dfremp-1
+122/517 Test  #87: cdoremp-energy1 ..................   Passed   77.05 sec
+        Start 172: dfremp-2
+123/517 Test #119: dct9 .............................   Passed   49.76 sec
+        Start 173: dft-grad-lr1
+124/517 Test #155: dfomp2-1 .........................   Passed   15.21 sec
+        Start 174: dft-grad-lr2
+125/517 Test #157: dfomp2-3 .........................   Passed   14.17 sec
+        Start 175: dft-grad-lr3
+126/517 Test #246: frac-traverse ....................   Passed  140.29 sec
+        Start 176: dft-grad-disk
+127/517 Test  #30: cc14 .............................   Passed  140.00 sec
+        Start 177: dfomp2p5-grad2
+128/517 Test  #25: cc13 .............................   Passed  140.84 sec
+        Start 178: dfrasscf-sp
+129/517 Test #120: dct10 ............................   Passed   54.89 sec
+        Start 179: dfscf-bz2
+130/517 Test #159: dfomp2-grad1 .....................   Passed   18.96 sec
+        Start 180: dft-b2plyp
+131/517 Test #144: dfmp2-freq1 ......................   Passed   33.73 sec
+        Start 181: dft-grac
+132/517 Test #138: dfmp2-1 ..........................   Passed   42.48 sec
+        Start 182: dft-ghost
+133/517 Test #178: dfrasscf-sp ......................   Passed   11.16 sec
+        Start 183: dft-grad-meta
+134/517 Test #143: dfmp2-fc .........................   Passed   40.53 sec
+        Start 184: dft-freq
+135/517 Test #103: ci-property ......................   Passed   73.39 sec
+        Start 185: dft-freq-analytic1
+136/517 Test #176: dft-grad-disk ....................   Passed   13.26 sec
+        Start 186: dft-freq-analytic2
+137/517 Test #181: dft-grac .........................   Passed    8.09 sec
+        Start 187: dft-grad1
+138/517 Test #149: dfccsdt2 .........................   Passed   41.46 sec
+        Start 188: dft-grad2
+139/517 Test #154: dfmp2-grad5 ......................   Passed   34.55 sec
+        Start 189: dft-psivar
+140/517 Test #211: fsapt-allterms ...................   Passed  158.69 sec
+        Start 190: dft-b3lyp
+141/517 Test #145: dfmp2-freq2 ......................   Passed   47.10 sec
+        Start 191: dft1
+142/517 Test #158: dfomp2-4 .........................   Passed   36.11 sec
+        Start 192: dft-vv10
+143/517 Test #182: dft-ghost ........................   Passed   15.99 sec
+        Start 193: dft1-alt
+144/517 Test #173: dft-grad-lr1 .....................   Passed   25.20 sec
+        Start 194: dft2
+145/517 Test #162: dfomp3-1 .........................   Passed   37.07 sec
+        Start 195: dft3
+146/517 Test #180: dft-b2plyp .......................   Passed   21.08 sec
+        Start 196: dft-omega
+147/517 Test #168: dfomp2p5-grad1 ...................   Passed   38.14 sec
+        Start 197: dft-dens-cut
+148/517 Test #148: dfccsdat2 ........................   Passed   56.76 sec
+        Start 198: dlpnomp2-1
+149/517 Test #165: dfomp3-grad2 .....................   Passed   43.58 sec
+        Start 199: dlpnomp2-2
+150/517 Test #187: dft-grad1 ........................   Passed   19.39 sec
+        Start 200: dlpnomp2-3
+151/517 Test #163: dfomp3-2 .........................   Passed   45.65 sec
+        Start 201: docs-bases
+152/517 Test #188: dft-grad2 ........................   Passed   18.27 sec
+        Start 202: docs-dft
+153/517 Test #164: dfomp3-grad1 .....................   Passed   47.62 sec
+        Start 203: explicit-am-basis
+154/517 Test #166: dfomp2p5-1 .......................   Passed   47.84 sec
+        Start 204: extern1
+155/517 Test #179: dfscf-bz2 ........................   Passed   33.96 sec
+        Start 205: extern2
+156/517 Test #197: dft-dens-cut .....................   Passed    9.92 sec
+        Start 206: extern3
+157/517 Test #194: dft2 .............................   Passed   14.99 sec
+        Start 207: extern4
+158/517 Test #201: docs-bases .......................   Passed    5.66 sec
+        Start 209: fsapt2
+159/517 Test #156: dfomp2-2 .........................   Passed   54.82 sec
+        Start 210: fsapt-terms
+160/517 Test #160: dfomp2-grad2 .....................   Passed   54.16 sec
+        Start 212: fsapt-ext
+161/517 Test #202: docs-dft .........................   Passed    5.81 sec
+        Start 213: fsapt-ext-abc
+162/517 Test #400: scf-bz2 ..........................   Passed  182.52 sec
+        Start 214: fsapt-ext-abc2
+163/517 Test #200: dlpnomp2-3 .......................   Passed    9.78 sec
+        Start 215: fsapt-ext-abc-au
+164/517 Test #198: dlpnomp2-1 .......................   Passed   11.94 sec
+        Start 217: isapt2
+165/517 Test #167: dfomp2p5-2 .......................   Passed   53.95 sec
+        Start 218: isapt-siao1
+166/517 Test  #43: cc27 .............................   Passed  184.79 sec
+        Start 219: fisapt-siao1
+167/517 Test #203: explicit-am-basis ................   Passed    8.69 sec
+        Start 220: isapt-charged
+168/517 Test #177: dfomp2p5-grad2 ...................   Passed   45.74 sec
+        Start 221: fci-dipole
+169/517 Test #183: dft-grad-meta ....................   Passed   34.24 sec
+        Start 222: fci-h2o
+170/517 Test #185: dft-freq-analytic1 ...............   Passed   34.54 sec
+        Start 223: fci-h2o-2
+171/517 Test #207: extern4 ..........................   Passed    8.58 sec
+        Start 224: fci-h2o-fzcv
+172/517 Test #192: dft-vv10 .........................   Passed   26.57 sec
+        Start 225: fci-tdm
+173/517 Test #184: dft-freq .........................   Passed   37.27 sec
+        Start 226: fci-tdm-2
+174/517 Test #206: extern3 ..........................   Passed   10.96 sec
+        Start 227: fci-coverage
+175/517 Test #209: fsapt2 ...........................   Passed   10.96 sec
+        Start 228: fcidump
+176/517 Test #212: fsapt-ext ........................   Passed   11.99 sec
+        Start 229: fd-freq-energy
+177/517 Test #225: fci-tdm ..........................   Passed    6.20 sec
+        Start 231: fd-freq-gradient
+178/517 Test #195: dft3 .............................   Passed   30.19 sec
+        Start 233: fd-gradient
+179/517 Test #210: fsapt-terms ......................   Passed   17.83 sec
+        Start 234: freq-isotope1
+180/517 Test #189: dft-psivar .......................   Passed   40.58 sec
+        Start 235: freq-isotope2
+181/517 Test #146: dfccsd-grad2 .....................   Passed   83.60 sec
+        Start 236: fnocc1
+182/517 Test #199: dlpnomp2-2 .......................   Passed   25.49 sec
+        Start 237: fnocc2
+183/517 Test #227: fci-coverage .....................   Passed   10.39 sec
+        Start 238: fnocc3
+184/517 Test #222: fci-h2o ..........................   Passed   15.16 sec
+        Start 239: fnocc4
+185/517 Test #224: fci-h2o-fzcv .....................   Passed   13.93 sec
+        Start 240: fnocc5
+186/517 Test #214: fsapt-ext-abc2 ...................   Passed   19.70 sec
+        Start 241: fnocc6
+187/517 Test #215: fsapt-ext-abc-au .................   Passed   19.20 sec
+        Start 242: fnocc7
+188/517 Test #221: fci-dipole .......................   Passed   17.30 sec
+        Start 243: frac
+189/517 Test #213: fsapt-ext-abc ....................   Passed   21.88 sec
+        Start 244: frac-ip-fitting
+190/517 Test #223: fci-h2o-2 ........................   Passed   16.05 sec
+        Start 245: frac-sym
+191/517 Test #190: dft-b3lyp ........................   Passed   46.34 sec
+        Start 247: ghosts
+192/517 Test #228: fcidump ..........................   Passed   14.18 sec
+        Start 248: gibbs
+193/517 Test #216: isapt1 ...........................   Passed  205.78 sec
+        Start 249: lccd-grad1
+194/517 Test  #37: cc21 .............................   Passed  207.08 sec
+        Start 250: lccd-grad2
+195/517 Test #245: frac-sym .........................   Passed    6.02 sec
+        Start 251: matrix1
+196/517 Test #172: dfremp-2 .........................   Passed   72.68 sec
+        Start 252: matrix2
+197/517 Test #204: extern1 ..........................   Passed   34.05 sec
+        Start 253: mbis-1
+198/517 Test #186: dft-freq-analytic2 ...............   Passed   59.59 sec
+        Start 254: mbis-2
+199/517 Test #205: extern2 ..........................   Passed   34.93 sec
+        Start 255: mbis-3
+200/517 Test #241: fnocc6 ...........................   Passed   11.51 sec
+        Start 256: mbis-4
+201/517 Test #243: frac .............................   Passed   10.69 sec
+        Start 257: mbis-5
+202/517 Test #236: fnocc1 ...........................   Passed   17.58 sec
+        Start 258: mbis-6
+203/517 Test #251: matrix1 ..........................   Passed    6.67 sec
+        Start 259: mcscf1
+204/517 Test #238: fnocc3 ...........................   Passed   15.95 sec
+        Start 260: mcscf2
+205/517 Test #235: freq-isotope2 ....................   Passed   19.21 sec
+        Start 261: mcscf3
+206/517 Test #249: lccd-grad1 .......................   Passed   11.73 sec
+        Start 262: mints1
+207/517 Test #234: freq-isotope1 ....................   Passed   19.98 sec
+        Start 263: mints2
+208/517 Test #147: dfccsd-t-grad2 ...................   Passed  103.78 sec
+        Start 264: mints3
+209/517 Test #252: matrix2 ..........................   Passed    7.97 sec
+        Start 265: mints4
+210/517 Test #240: fnocc5 ...........................   Passed   17.80 sec
+        Start 266: mints5
+211/517 Test #250: lccd-grad2 .......................   Passed   13.89 sec
+        Start 267: mints6
+212/517 Test #259: mcscf1 ...........................   Passed    6.99 sec
+        Start 268: mints8
+213/517 Test #169: dforemp-grad1 ....................   Passed   92.24 sec
+        Start 269: mints-benchmark
+214/517 Test #262: mints1 ...........................   Passed    6.07 sec
+        Start 270: mints-helper
+215/517 Test #261: mcscf3 ...........................   Passed    6.33 sec
+        Start 271: mints9
+216/517 Test #260: mcscf2 ...........................   Passed    7.72 sec
+        Start 272: mints10
+217/517 Test #254: mbis-2 ...........................   Passed   10.87 sec
+        Start 273: mints15
+218/517 Test #265: mints4 ...........................   Passed    5.85 sec
+        Start 274: molden1
+219/517 Test #196: dft-omega ........................   Passed   58.70 sec
+        Start 275: molden2
+220/517 Test #255: mbis-3 ...........................   Passed   11.84 sec
+        Start 276: mom
+221/517 Test #266: mints5 ...........................   Passed    6.10 sec
+        Start 277: mom-h2o-3
+222/517 Test #264: mints3 ...........................   Passed    7.02 sec
+        Start 278: mom-h2o-4
+223/517 Test #263: mints2 ...........................   Passed    9.72 sec
+        Start 279: mp2-1
+224/517 Test #253: mbis-1 ...........................   Passed   15.40 sec
+        Start 280: mp2-def2
+225/517 Test #174: dft-grad-lr2 .....................   Passed   90.38 sec
+        Start 281: mp2-grad1
+226/517 Test #272: mints10 ..........................   Passed    7.37 sec
+        Start 282: mp2-grad2
+227/517 Test #247: ghosts ...........................   Passed   26.51 sec
+        Start 283: mp2-h
+228/517 Test #271: mints9 ...........................   Passed    8.16 sec
+        Start 284: mp2p5-grad1
+229/517 Test  #42: cc26 .............................   Passed  231.57 sec
+        Start 285: mp2p5-grad2
+230/517 Test #242: fnocc7 ...........................   Passed   29.57 sec
+        Start 286: mp3-grad1
+231/517 Test #273: mints15 ..........................   Passed    8.81 sec
+        Start 287: mp3-grad2
+232/517 Test #270: mints-helper .....................   Passed    9.82 sec
+        Start 288: mp2-property
+233/517 Test #217: isapt2 ...........................   Passed   50.27 sec
+        Start 289: mpn-bh
+234/517 Test #226: fci-tdm-2 ........................   Passed   44.77 sec
+        Start 290: nbody-he-cluster
+235/517 Test #267: mints6 ...........................   Passed   13.56 sec
+        Start 291: nbody-intermediates
+236/517 Test #239: fnocc4 ...........................   Passed   33.65 sec
+        Start 292: nbody-nocp-gradient
+237/517 Test #256: mbis-4 ...........................   Passed   21.89 sec
+        Start 293: nbo
+238/517 Test #275: molden2 ..........................   Passed   11.26 sec
+        Start 294: nbody-cp-gradient
+239/517 Test #274: molden1 ..........................   Passed   11.82 sec
+        Start 295: nbody-vmfc-gradient
+240/517 Test #258: mbis-6 ...........................   Passed   21.87 sec
+        Start 296: nbody-vmfc-hessian
+241/517 Test #276: mom ..............................   Passed   13.06 sec
+        Start 297: nbody-hessian
+242/517 Test #248: gibbs ............................   Passed   34.56 sec
+        Start 300: nbody-multi-level
+243/517 Test #100: cisd-opt-fd ......................   Passed  162.17 sec
+        Start 301: nbody-multi-level-2
+244/517 Test #268: mints8 ...........................   Passed   18.51 sec
+        Start 302: numpy-array-interface
+245/517 Test #281: mp2-grad1 ........................   Passed   11.23 sec
+        Start 303: olccd-freq1
+246/517 Test #284: mp2p5-grad1 ......................   Passed   10.54 sec
+        Start 304: olccd-grad1
+247/517 Test #286: mp3-grad1 ........................   Passed   10.84 sec
+        Start 305: olccd-grad2
+248/517 Test #269: mints-benchmark ..................   Passed   19.64 sec
+        Start 306: olccd1
+249/517 Test #282: mp2-grad2 ........................   Passed   11.60 sec
+        Start 307: olccd2
+250/517 Test #285: mp2p5-grad2 ......................   Passed   11.14 sec
+        Start 308: olccd3
+251/517 Test #115: dct5 .............................   Passed  156.03 sec
+        Start 309: omp2-1
+252/517 Test #233: fd-gradient ......................   Passed   47.67 sec
+        Start 310: omp2-2
+253/517 Test  #89: cdremp-1 .........................   Passed  181.26 sec
+        Start 311: omp2-3
+254/517 Test #287: mp3-grad2 ........................   Passed   11.25 sec
+        Start 312: omp2-4
+255/517 Test #288: mp2-property .....................   Passed   10.91 sec
+        Start 313: omp2-5
+256/517 Test #237: fnocc2 ...........................   Passed   46.07 sec
+        Start 314: omp2-grad1
+257/517 Test #293: nbo ..............................   Passed    9.03 sec
+        Start 315: omp2-grad2
+258/517 Test #277: mom-h2o-3 ........................   Passed   19.22 sec
+        Start 316: omp2p5-1
+259/517 Test #231: fd-freq-gradient .................   Passed   49.78 sec
+        Start 317: omp2p5-2
+260/517 Test #289: mpn-bh ...........................   Passed   12.98 sec
+        Start 318: omp2p5-grad1
+261/517 Test  #36: cc2 ..............................   Passed  247.23 sec
+        Start 319: omp2p5-grad2
+262/517 Test #302: numpy-array-interface ............   Passed    6.16 sec
+        Start 320: omp3-1
+263/517 Test #279: mp2-1 ............................   Passed   20.80 sec
+        Start 321: omp3-2
+264/517 Test #283: mp2-h ............................   Passed   16.93 sec
+        Start 322: omp3-3
+265/517 Test #257: mbis-5 ...........................   Passed   34.85 sec
+        Start 323: omp3-4
+266/517 Test #278: mom-h2o-4 ........................   Passed   22.90 sec
+        Start 324: omp3-5
+267/517 Test #171: dfremp-1 .........................   Passed  112.02 sec
+        Start 325: omp3-grad1
+268/517 Test  #41: cc25 .............................   Passed  250.10 sec
+        Start 326: omp3-grad2
+269/517 Test  #88: cdoremp-energy2 ..................   Passed  191.41 sec
+        Start 327: opt-lindep-change
+270/517 Test #118: dct8 .............................   Passed  166.56 sec
+        Start 328: opt1
+271/517 Test  #40: cc24 .............................   Passed  255.20 sec
+        Start 329: opt1-fd
+272/517 Test  #39: cc23 .............................   Passed  256.23 sec
+        Start 330: opt2
+273/517 Test #309: omp2-1 ...........................   Passed   13.51 sec
+        Start 331: opt2-fd
+274/517 Test #316: omp2p5-1 .........................   Passed   11.85 sec
+        Start 332: opt3
+275/517 Test #306: olccd1 ...........................   Passed   15.87 sec
+        Start 333: opt4
+276/517 Test #304: olccd-grad1 ......................   Passed   17.69 sec
+        Start 334: opt5
+277/517 Test #292: nbody-nocp-gradient ..............   Passed   25.10 sec
+        Start 335: opt6
+278/517 Test #314: omp2-grad1 .......................   Passed   16.78 sec
+        Start 336: opt7
+279/517 Test #311: omp2-3 ...........................   Passed   17.90 sec
+        Start 337: opt8
+280/517 Test #310: omp2-2 ...........................   Passed   20.21 sec
+        Start 338: opt9
+281/517 Test #305: olccd-grad2 ......................   Passed   20.67 sec
+        Start 339: opt11
+282/517 Test #320: omp3-1 ...........................   Passed   15.90 sec
+        Start 340: opt12
+283/517 Test #318: omp2p5-grad1 .....................   Passed   17.44 sec
+        Start 342: opt14
+284/517 Test #317: omp2p5-2 .........................   Passed   21.14 sec
+        Start 343: opt15
+285/517 Test #244: frac-ip-fitting ..................   Passed   63.01 sec
+        Start 344: opt16
+286/517 Test #315: omp2-grad2 .......................   Passed   21.93 sec
+        Start 345: opt-irc-1
+287/517 Test #325: omp3-grad1 .......................   Passed   16.95 sec
+        Start 346: opt-irc-2
+288/517 Test #229: fd-freq-energy ...................   Passed   75.77 sec
+        Start 347: opt-irc-3
+289/517 Test #193: dft1-alt .........................   Passed  105.66 sec
+        Start 348: opt-freeze-coords
+290/517 Test #321: omp3-2 ...........................   Passed   23.16 sec
+        Start 349: oremp-grad1
+291/517 Test #319: omp2p5-grad2 .....................   Passed   24.26 sec
+        Start 350: oremp-grad2
+292/517 Test #328: opt1 .............................   Passed   16.46 sec
+        Start 351: phi-ao
+293/517 Test #308: olccd3 ...........................   Passed   28.76 sec
+        Start 352: props1
+294/517 Test #291: nbody-intermediates ..............   Passed   39.80 sec
+        Start 353: props2
+295/517 Test #334: opt5 .............................   Passed   15.99 sec
+        Start 354: props3
+296/517 Test #332: opt3 .............................   Passed   19.60 sec
+        Start 355: props4
+297/517 Test #191: dft1 .............................   Passed  118.21 sec
+        Start 356: psimrcc-ccsd_t-1
+298/517 Test #307: olccd2 ...........................   Passed   36.47 sec
+        Start 357: psimrcc-ccsd_t-2
+299/517 Test #326: omp3-grad2 .......................   Passed   29.25 sec
+        Start 358: psimrcc-ccsd_t-3
+300/517 Test #322: omp3-3 ...........................   Passed   31.72 sec
+        Start 359: psimrcc-ccsd_t-4
+301/517 Test #218: isapt-siao1 ......................   Passed   97.22 sec
+        Start 360: psimrcc-fd-freq1
+302/517 Test #327: opt-lindep-change ................   Passed   29.25 sec
+        Start 361: psimrcc-fd-freq2
+303/517 Test #352: props1 ...........................   Passed   11.15 sec
+        Start 362: psimrcc-pt2
+304/517 Test #340: opt12 ............................   Passed   21.50 sec
+        Start 363: psimrcc-sp1
+305/517 Test #331: opt2-fd ..........................   Passed   28.98 sec
+        Start 364: psithon1
+306/517 Test #355: props4 ...........................   Passed    9.65 sec
+        Start 365: psithon2
+307/517 Test #330: opt2 .............................   Passed   29.79 sec
+        Start 366: pubchem1
+308/517 Test #357: psimrcc-ccsd_t-2 .................   Passed    7.08 sec
+        Start 367: pubchem2
+309/517 Test #358: psimrcc-ccsd_t-3 .................   Passed    6.81 sec
+        Start 368: pywrap-alias
+310/517 Test #219: fisapt-siao1 .....................   Passed  101.95 sec
+        Start 369: pywrap-all
+311/517 Test #107: dct-grad1 ........................   Passed  206.56 sec
+        Start 370: pywrap-basis
+312/517 Test #338: opt9 .............................   Passed   24.79 sec
+        Start 371: pywrap-cbs1
+313/517 Test #333: opt4 .............................   Passed   30.61 sec
+        Start 372: pywrap-checkrun-convcrit
+314/517 Test #329: opt1-fd ..........................   Passed   34.02 sec
+        Start 373: pywrap-checkrun-rhf
+315/517 Test #362: psimrcc-pt2 ......................   Passed    6.73 sec
+        Start 374: pywrap-checkrun-rohf
+316/517 Test #348: opt-freeze-coords ................   Passed   19.99 sec
+        Start 375: pywrap-checkrun-uhf
+317/517 Test #354: props3 ...........................   Passed   14.16 sec
+        Start 376: pywrap-db1
+318/517 Test #388: sapt4 ............................   Passed  291.88 sec
+        Start 377: pywrap-db3
+319/517 Test #356: psimrcc-ccsd_t-1 .................   Passed   13.64 sec
+        Start 378: pywrap-molecule
+320/517 Test #335: opt6 .............................   Passed   32.23 sec
+        Start 379: rasci-c2-active
+321/517 Test #367: pubchem2 .........................***Failed    6.19 sec
+        Start 380: rasci-h2o
+322/517 Test #295: nbody-vmfc-gradient ..............   Passed   55.71 sec
+        Start 381: rasci-ne
+323/517 Test #366: pubchem1 .........................***Failed    6.67 sec
+        Start 382: rasscf-sp
+324/517 Test  #78: cc7 ..............................   Passed  243.15 sec
+        Start 383: sad-scf-type
+325/517 Test #363: psimrcc-sp1 ......................   Passed    9.26 sec
+        Start 384: sad1
+326/517 Test #353: props2 ...........................   Passed   20.43 sec
+        Start 385: sapt1
+327/517 Test #290: nbody-he-cluster .................   Passed   62.00 sec
+        Start 387: sapt3
+328/517 Test #336: opt7 .............................   Passed   36.64 sec
+        Start 389: sapt5
+329/517 Test #377: pywrap-db3 .......................   Passed    6.67 sec
+        Start 390: sapt6
+330/517 Test #378: pywrap-molecule ..................   Passed    6.52 sec
+        Start 391: sapt-dft-api
+331/517 Test #359: psimrcc-ccsd_t-4 .................   Passed   18.66 sec
+        Start 392: sapt-dft-lrc
+332/517 Test #364: psithon1 .........................   Passed   13.51 sec
+        Start 393: remp-energy1
+333/517 Test #380: rasci-h2o ........................   Passed    8.60 sec
+        Start 394: remp-energy2
+334/517 Test #360: psimrcc-fd-freq1 .................   Passed   20.33 sec
+        Start 395: sapt-exch-disp-inf
+335/517 Test #384: sad1 .............................   Passed   10.20 sec
+        Start 396: sapt-exch-ind-inf
+336/517 Test #379: rasci-c2-active ..................   Passed   12.81 sec
+        Start 397: sapt-exch-ind30-inf
+337/517 Test #370: pywrap-basis .....................   Passed   19.74 sec
+        Start 398: sapt7
+338/517 Test #347: opt-irc-3 ........................   Passed   39.63 sec
+        Start 399: sapt8
+339/517 Test #337: opt8 .............................   Passed   47.68 sec
+        Start 401: scf-dipder
+340/517 Test #344: opt16 ............................   Passed   45.11 sec
+        Start 402: scf-guess
+341/517 Test #351: phi-ao ...........................   Passed   40.50 sec
+        Start 403: scf-guess-read1
+342/517 Test #383: sad-scf-type .....................   Passed   18.38 sec
+        Start 404: scf-upcast-custom-basis
+343/517 Test #372: pywrap-checkrun-convcrit .........   Passed   24.37 sec
+        Start 405: scf-guess-read2
+344/517 Test #339: opt11 ............................   Passed   51.58 sec
+        Start 406: scf-guess-read3
+345/517 Test #294: nbody-cp-gradient ................   Passed   78.93 sec
+        Start 407: scf1
+346/517 Test #365: psithon2 .........................   Passed   29.40 sec
+        Start 408: scf-occ
+347/517 Test #385: sapt1 ............................   Passed   21.15 sec
+        Start 409: scf2
+348/517 Test #382: rasscf-sp ........................   Passed   24.24 sec
+        Start 410: scf3
+349/517 Test #396: sapt-exch-ind-inf ................   Passed   13.02 sec
+        Start 411: scf4
+350/517 Test #232: fd-freq-gradient-large ...........   Passed  319.82 sec
+        Start 412: scf5
+351/517 Test #392: sapt-dft-lrc .....................   Passed   21.66 sec
+        Start 413: scf6
+352/517 Test #393: remp-energy1 .....................   Passed   21.65 sec
+        Start 414: scf7
+353/517 Test #298: nbody-convergence ................   Passed  321.69 sec
+        Start 415: scf-level-shift-rks
+354/517 Test #401: scf-dipder .......................   Passed   12.89 sec
+        Start 416: scf-level-shift-uhf
+355/517 Test #404: scf-upcast-custom-basis ..........   Passed    9.86 sec
+        Start 417: scf-level-shift-cuhf
+356/517 Test #403: scf-guess-read1 ..................   Passed   10.46 sec
+        Start 418: scf-level-shift-rohf
+357/517 Test #406: scf-guess-read3 ..................   Passed    8.32 sec
+        Start 419: scf-property
+358/517 Test #387: sapt3 ............................   Passed   27.76 sec
+        Start 420: soscf-large
+359/517 Test #408: scf-occ ..........................   Passed   10.15 sec
+        Start 421: soscf-ref
+360/517 Test #410: scf3 .............................   Passed    8.49 sec
+        Start 422: soscf-dft
+361/517 Test #409: scf2 .............................   Passed   10.02 sec
+        Start 423: stability1
+362/517 Test #361: psimrcc-fd-freq2 .................   Passed   44.17 sec
+        Start 424: dfep2-1
+363/517 Test #405: scf-guess-read2 ..................   Passed   13.38 sec
+        Start 425: dfep2-2
+364/517 Test #394: remp-energy2 .....................   Passed   26.50 sec
+        Start 426: sapt-dft1
+365/517 Test #407: scf1 .............................   Passed   12.99 sec
+        Start 427: sapt-dft2
+366/517 Test #399: sapt8 ............................   Passed   21.94 sec
+        Start 428: sapt-compare
+367/517 Test #418: scf-level-shift-rohf .............   Passed    8.12 sec
+        Start 429: sapt-sf1
+368/517 Test #349: oremp-grad1 ......................   Passed   60.02 sec
+        Start 430: dft-custom
+369/517 Test #391: sapt-dft-api .....................   Passed   34.03 sec
+        Start 431: dft-reference
+370/517 Test #395: sapt-exch-disp-inf ...............   Passed   31.96 sec
+        Start 432: stability2
+371/517 Test #389: sapt5 ............................   Passed   36.55 sec
+        Start 433: stability3
+372/517 Test #417: scf-level-shift-cuhf .............   Passed   12.04 sec
+        Start 434: tu1-h2o-energy
+373/517 Test #419: scf-property .....................   Passed   11.67 sec
+        Start 435: tu2-ch2-energy
+374/517 Test #416: scf-level-shift-uhf ..............   Passed   13.64 sec
+        Start 436: tu3-h2o-opt
+375/517 Test #398: sapt7 ............................   Passed   28.54 sec
+        Start 437: scf-response1
+376/517 Test #425: dfep2-2 ..........................   Passed    9.62 sec
+        Start 438: scf-response2
+377/517 Test #411: scf4 .............................   Passed   19.05 sec
+        Start 439: scf-response3
+378/517 Test #423: stability1 .......................   Passed   11.44 sec
+        Start 440: scf-cholesky-basis
+379/517 Test #429: sapt-sf1 .........................   Passed    6.97 sec
+        Start 441: scf-auto-cholesky
+380/517 Test #424: dfep2-1 ..........................   Passed   11.52 sec
+        Start 442: tu4-h2o-freq
+381/517 Test #420: soscf-large ......................   Passed   15.15 sec
+        Start 443: tu5-sapt
+382/517 Test #421: soscf-ref ........................   Passed   14.85 sec
+        Start 444: tu6-cp-ne2
+383/517 Test #432: stability2 .......................   Passed    7.31 sec
+        Start 445: x2c1
+384/517 Test #431: dft-reference ....................   Passed    9.48 sec
+        Start 446: x2c2
+385/517 Test #434: tu1-h2o-energy ...................   Passed    8.52 sec
+        Start 447: x2c3
+386/517 Test #402: scf-guess ........................   Passed   32.18 sec
+        Start 448: x2c-perturb-h
+387/517 Test #280: mp2-def2 .........................   Passed  116.43 sec
+        Start 449: zaptn-nh2
+388/517 Test #435: tu2-ch2-energy ...................   Passed    9.75 sec
+        Start 450: options1
+389/517 Test #437: scf-response1 ....................   Passed    9.15 sec
+        Start 451: cubeprop-esp
+390/517 Test #415: scf-level-shift-rks ..............   Passed   23.67 sec
+        Start 452: dft-smoke
+391/517 Test #433: stability3 .......................   Passed   11.05 sec
+        Start 453: scf-hess1
+392/517 Test #438: scf-response2 ....................   Passed   10.68 sec
+        Start 454: scf-hess2
+393/517 Test #296: nbody-vmfc-hessian ...............   Passed  110.29 sec
+        Start 455: scf-hess3
+394/517 Test #439: scf-response3 ....................   Passed   11.52 sec
+        Start 456: scf-hess4
+395/517 Test #436: tu3-h2o-opt ......................   Passed   12.71 sec
+        Start 457: scf-hess5
+396/517 Test #376: pywrap-db1 .......................   Passed   59.38 sec
+        Start 458: scf-freq1
+397/517 Test #450: options1 .........................   Passed    5.60 sec
+        Start 459: dft-jk
+398/517 Test #414: scf7 .............................   Passed   30.70 sec
+        Start 460: scf-coverage
+399/517 Test #368: pywrap-alias .....................   Passed   65.09 sec
+        Start 461: dft-custom-dhdf
+400/517 Test #447: x2c3 .............................   Passed    9.20 sec
+        Start 462: dft-custom-hybrid
+401/517 Test #170: dforemp-grad2 ....................   Passed  220.77 sec
+        Start 463: dft-custom-mgga
+402/517 Test #448: x2c-perturb-h ....................   Passed   10.05 sec
+        Start 464: dft-custom-gga
+403/517 Test #449: zaptn-nh2 ........................   Passed   10.34 sec
+        Start 465: pywrap-bfs
+404/517 Test #313: omp2-5 ...........................   Passed  112.94 sec
+        Start 466: pywrap-align
+405/517 Test #451: cubeprop-esp .....................   Passed   13.06 sec
+        Start 467: pywrap-align-chiral
+406/517 Test #381: rasci-ne .........................   Passed   66.90 sec
+        Start 468: mints12
+407/517 Test #443: tu5-sapt .........................   Passed   20.33 sec
+        Start 469: cc-module
+408/517 Test #456: scf-hess4 ........................   Passed   12.07 sec
+        Start 470: tdscf-1
+409/517 Test #390: sapt6 ............................   Passed   61.92 sec
+        Start 471: tdscf-2
+410/517 Test #453: scf-hess1 ........................   Passed   15.00 sec
+        Start 472: tdscf-3
+411/517 Test #345: opt-irc-1 ........................   Passed   95.64 sec
+        Start 473: tdscf-4
+412/517 Test #422: soscf-dft ........................   Passed   36.54 sec
+        Start 474: tdscf-5
+413/517 Test #466: pywrap-align .....................***Failed    6.09 sec
+        Start 475: tdscf-6
+414/517 Test #467: pywrap-align-chiral ..............***Failed    5.99 sec
+        Start 476: tdscf-7
+415/517 Test #446: x2c2 .............................   Passed   22.18 sec
+        Start 477: dft-pruning
+416/517 Test #460: scf-coverage .....................   Passed   12.85 sec
+        Start 478: freq-masses
+417/517 Test #454: scf-hess2 ........................   Passed   17.07 sec
+        Start 479: sapt9
+418/517 Test #312: omp2-4 ...........................   Passed  120.59 sec
+        Start 480: sapt10
+419/517 Test #468: mints12 ..........................   Passed    5.54 sec
+        Start 481: sapt11
+420/517 Test #459: dft-jk ...........................   Passed   15.77 sec
+        Start 482: scf-uhf-grad-nobeta
+421/517 Test #428: sapt-compare .....................   Passed   36.03 sec
+        Start 483: linK-1
+422/517 Test #442: tu4-h2o-freq .....................   Passed   28.08 sec
+        Start 486: cbs-xtpl-energy-conv
+423/517 Test #430: dft-custom .......................   Passed   37.76 sec
+        Start 487: ddd-deriv
+424/517 Test #343: opt15 ............................   Passed  104.69 sec
+        Start 488: nbody-he-4b
+425/517 Test #471: tdscf-2 ..........................   Passed   11.55 sec
+        Start 489: ddd-function-kwargs
+426/517 Test #470: tdscf-1 ..........................   Passed   13.21 sec
+        Start 490: psi4numpy-cphf
+427/517 Test #452: dft-smoke ........................   Passed   28.82 sec
+        Start 491: psi4numpy-dfmp2
+428/517 Test #462: dft-custom-hybrid ................   Passed   21.92 sec
+        Start 492: psi4numpy-rhf
+429/517 Test #350: oremp-grad2 ......................   Passed  103.25 sec
+        Start 493: psi4numpy-rhf-gradient
+430/517 Test #299: nbody-freq .......................   Passed  375.36 sec
+        Start 494: psi4numpy-rhf-hessian
+431/517 Test #482: scf-uhf-grad-nobeta ..............   Passed    9.05 sec
+        Start 495: psi4numpy-fci
+432/517 Test #476: tdscf-7 ..........................   Passed   11.61 sec
+        Start 496: cookbook-rohf-orb-rot
+433/517 Test #479: sapt9 ............................   Passed   12.33 sec
+        Start 497: cookbook-manual-fd-hess-energy
+434/517 Test #483: linK-1 ...........................   Passed   11.59 sec
+        Start 498: cookbook-manual-fd-hess-grad
+435/517 Test #371: pywrap-cbs1 ......................   Passed   90.35 sec
+        Start 499: python-energy
+436/517 Test #464: dft-custom-gga ...................   Passed   24.99 sec
+        Start 500: python-curve
+437/517 Test #458: scf-freq1 ........................   Passed   29.90 sec
+        Start 501: python-pubchem
+438/517 Test #492: psi4numpy-rhf ....................   Passed    6.68 sec
+        Start 502: python-mints9
+439/517 Test #473: tdscf-4 ..........................   Passed   19.23 sec
+        Start 503: python-mints2
+440/517 Test #445: x2c1 .............................   Passed   40.13 sec
+        Start 504: python-cc54
+441/517 Test #477: dft-pruning ......................   Passed   17.22 sec
+        Start 505: python-3-index-transforms
+442/517 Test #490: psi4numpy-cphf ...................   Passed    9.42 sec
+        Start 506: python-mints13
+443/517 Test #475: tdscf-6 ..........................   Passed   20.33 sec
+        Start 507: python-mints14
+444/517 Test #493: psi4numpy-rhf-gradient ...........   Passed    8.72 sec
+        Start 508: python-cc-amps
+445/517 Test #472: tdscf-3 ..........................   Passed   23.27 sec
+        Start 509: python-databases
+446/517 Test #491: psi4numpy-dfmp2 ..................   Passed   10.26 sec
+        Start 510: json-schema-1-energy
+447/517 Test #494: psi4numpy-rhf-hessian ............   Passed    9.85 sec
+        Start 511: json-schema-1-ghost
+448/517 Test #501: python-pubchem ...................***Failed    5.77 sec
+        Start 512: json-schema-1-orient
+449/517 Test #480: sapt10 ...........................   Passed   20.90 sec
+        Start 513: json-schema-1-throws
+450/517 Test #455: scf-hess3 ........................   Passed   40.08 sec
+        Start 514: json-schema-1-gradient
+451/517 Test #502: python-mints9 ....................   Passed    7.25 sec
+        Start 515: json-schema-1-properties
+452/517 Test #506: python-mints13 ...................   Passed    6.08 sec
+        Start 516: json-schema-1-response
+453/517 Test #457: scf-hess5 ........................   Passed   41.04 sec
+        Start 517: json-schema-1-tamps
+454/517 Test #500: python-curve .....................   Passed   11.75 sec
+455/517 Test #495: psi4numpy-fci ....................   Passed   15.06 sec
+456/517 Test #498: cookbook-manual-fd-hess-grad .....   Passed   12.88 sec
+457/517 Test #513: json-schema-1-throws .............   Passed    5.79 sec
+458/517 Test #511: json-schema-1-ghost ..............   Passed    6.75 sec
+459/517 Test #499: python-energy ....................   Passed   13.26 sec
+460/517 Test #507: python-mints14 ...................   Passed    9.44 sec
+461/517 Test #426: sapt-dft1 ........................   Passed   65.32 sec
+462/517 Test #503: python-mints2 ....................   Passed   11.69 sec
+463/517 Test #505: python-3-index-transforms ........   Passed   11.78 sec
+464/517 Test #474: tdscf-5 ..........................   Passed   31.61 sec
+465/517 Test #497: cookbook-manual-fd-hess-energy ...   Passed   17.38 sec
+466/517 Test #481: sapt11 ...........................   Passed   30.46 sec
+467/517 Test #512: json-schema-1-orient .............   Passed   10.51 sec
+468/517 Test #465: pywrap-bfs .......................   Passed   42.10 sec
+469/517 Test #324: omp3-5 ...........................   Passed  147.75 sec
+470/517 Test #342: opt14 ............................   Passed  132.40 sec
+471/517 Test #478: freq-masses ......................   Passed   32.88 sec
+472/517 Test #514: json-schema-1-gradient ...........   Passed    9.75 sec
+473/517 Test #515: json-schema-1-properties .........   Passed   10.08 sec
+474/517 Test #510: json-schema-1-energy .............   Passed   14.75 sec
+475/517 Test #504: python-cc54 ......................   Passed   22.79 sec
+476/517 Test #487: ddd-deriv ........................   Passed   35.24 sec
+477/517 Test #486: cbs-xtpl-energy-conv .............   Passed   38.42 sec
+478/517 Test #175: dft-grad-lr3 .....................   Passed  269.30 sec
+479/517 Test #341: opt13 ............................   Passed  409.59 sec
+480/517 Test #413: scf6 .............................   Passed   89.15 sec
+481/517 Test #517: json-schema-1-tamps ..............   Passed   21.85 sec
+482/517 Test #508: python-cc-amps ...................   Passed   35.47 sec
+483/517 Test #461: dft-custom-dhdf ..................   Passed   67.58 sec
+484/517 Test #300: nbody-multi-level ................   Passed  182.08 sec
+485/517 Test  #46: cc3 ..............................   Passed  423.56 sec
+486/517 Test #323: omp3-4 ...........................   Passed  180.23 sec
+487/517 Test #509: python-databases .................   Passed   55.79 sec
+488/517 Test #114: dct4 .............................   Passed  362.47 sec
+489/517 Test #444: tu6-cp-ne2 .......................   Passed  112.36 sec
+490/517 Test #496: cookbook-rohf-orb-rot ............   Passed   77.45 sec
+491/517 Test #516: json-schema-1-response ...........   Passed   64.19 sec
+492/517 Test #469: cc-module ........................   Passed  103.20 sec
+493/517 Test #440: scf-cholesky-basis ...............   Passed  131.90 sec
+494/517 Test #346: opt-irc-2 ........................   Passed  212.73 sec
+495/517 Test #297: nbody-hessian ....................   Passed  243.65 sec
+496/517 Test #208: fsapt1 ...........................   Passed  487.94 sec
+497/517 Test #463: dft-custom-mgga ..................   Passed  153.00 sec
+498/517 Test  #26: cc13a ............................   Passed  507.19 sec
+499/517 Test #374: pywrap-checkrun-rohf .............   Passed  224.15 sec
+500/517 Test  #12: cbs-xtpl-alpha ...................   Passed  524.58 sec
+501/517 Test #303: olccd-freq1 ......................   Passed  312.80 sec
+502/517 Test #412: scf5 .............................   Passed  243.37 sec
+503/517 Test #488: nbody-he-4b ......................   Passed  192.64 sec
+504/517 Test #375: pywrap-checkrun-uhf ..............   Passed  274.14 sec
+505/517 Test #373: pywrap-checkrun-rhf ..............   Passed  292.03 sec
+506/517 Test #427: sapt-dft2 ........................   Passed  257.54 sec
+507/517 Test #397: sapt-exch-ind30-inf ..............   Passed  302.13 sec
+508/517 Test #161: dfomp2-grad3 .....................   Passed  485.63 sec
+509/517 Test #369: pywrap-all .......................   Passed  385.99 sec
+510/517 Test #441: scf-auto-cholesky ................   Passed  337.71 sec
+511/517 Test #220: isapt-charged ....................   Passed  511.52 sec
+512/517 Test #489: ddd-function-kwargs ..............   Passed  353.97 sec
+513/517 Test #301: nbody-multi-level-2 ..............   Passed  564.22 sec
+514/517 Test #125: density-screen-2 .................   Passed  859.42 sec
+515/517 Test #230: fd-freq-energy-large .............   Passed  876.28 sec
+516/517 Test #484: linK-2 ...........................   Passed  963.18 sec
+517/517 Test  #17: cbs-xtpl-func ....................   Passed  1241.32 sec
+
+99% tests passed, 5 tests failed out of 517
+
+Label Time Summary:
+aediis           =  10.87 sec*proc (1 test)
+cart             = 9150.89 sec*proc (138 tests)
+cas              =  73.39 sec*proc (1 test)
+casscf           = 172.50 sec*proc (11 tests)
+cbs              = 3050.30 sec*proc (16 tests)
+cc               = 5273.86 sec*proc (66 tests)
+cdomp2           =  75.57 sec*proc (2 tests)
+cepa             = 134.79 sec*proc (6 tests)
+ci               = 192.62 sec*proc (8 tests)
+cisd             = 232.84 sec*proc (7 tests)
+cookbook         = 107.70 sec*proc (3 tests)
+cubeprop         =  44.65 sec*proc (3 tests)
+d2ints           = 291.17 sec*proc (9 tests)
+dct              = 1298.78 sec*proc (16 tests)
+df               = 1834.67 sec*proc (44 tests)
+dfccd            =  12.12 sec*proc (1 test)
+dfccd-grad       =  14.73 sec*proc (1 test)
+dfccdl           =  11.40 sec*proc (1 test)
+dfccsd           =  13.21 sec*proc (1 test)
+dfccsd-grad      = 106.90 sec*proc (2 tests)
+dfccsd-t-grad    =  27.13 sec*proc (1 test)
+dfccsdat         =  78.38 sec*proc (2 tests)
+dfccsdl          =  14.67 sec*proc (1 test)
+dfccsdt          =  56.74 sec*proc (2 tests)
+dfccsdt-grad     = 103.78 sec*proc (1 test)
+dfep2            =  21.14 sec*proc (2 tests)
+dfmp2            = 312.78 sec*proc (14 tests)
+dfocc            = 1011.07 sec*proc (8 tests)
+dfomp2           = 679.07 sec*proc (7 tests)
+dfomp2p5         = 185.67 sec*proc (4 tests)
+dfomp3           = 173.91 sec*proc (4 tests)
+dfscf            =  33.96 sec*proc (1 test)
+dft              = 3333.41 sec*proc (34 tests)
+direct-scf       = 1090.02 sec*proc (3 tests)
+dlpno            =  47.22 sec*proc (3 tests)
+docs             =  11.46 sec*proc (2 tests)
+eom              = 1829.59 sec*proc (19 tests)
+extern           = 343.39 sec*proc (9 tests)
+fci              =  29.98 sec*proc (2 tests)
+fcidump          =  14.18 sec*proc (1 test)
+findif           = 6943.03 sec*proc (50 tests)
+fnocc            = 219.03 sec*proc (10 tests)
+frac             = 157.01 sec*proc (3 tests)
+freq             = 711.50 sec*proc (13 tests)
+fsapt            = 729.00 sec*proc (7 tests)
+gradient         = 2265.83 sec*proc (22 tests)
+hessian          = 729.30 sec*proc (3 tests)
+json             = 143.66 sec*proc (8 tests)
+lccd             =  87.88 sec*proc (3 tests)
+longtests        = 1732.87 sec*proc (5 tests)
+mcscf            =  21.05 sec*proc (3 tests)
+medlong          = 4890.40 sec*proc (7 tests)
+minitests        =  26.90 sec*proc (3 tests)
+mints            = 147.29 sec*proc (16 tests)
+misc             = 485.46 sec*proc (20 tests)
+mom              =  65.87 sec*proc (4 tests)
+mp2              = 347.23 sec*proc (17 tests)
+nbody            = 3043.51 sec*proc (19 tests)
+noc1             = 6117.37 sec*proc (112 tests)
+numpy            =   6.16 sec*proc (1 test)
+occ              = 211.42 sec*proc (4 tests)
+olccd            = 432.25 sec*proc (6 tests)
+omp              = 843.49 sec*proc (18 tests)
+opt              = 1866.96 sec*proc (24 tests)
+properties       = 549.09 sec*proc (25 tests)
+psi              = 32028.60 sec*proc (516 tests)
+psi4numpy        =  60.00 sec*proc (6 tests)
+psimrcc          = 126.67 sec*proc (8 tests)
+python           = 191.06 sec*proc (11 tests)
+pywrap           = 1454.59 sec*proc (12 tests)
+quicktests       = 4785.57 sec*proc (179 tests)
+rasci            =  88.31 sec*proc (3 tests)
+sapt             = 3160.91 sec*proc (34 tests)
+scf              = 5146.48 sec*proc (86 tests)
+shorttests       =  77.76 sec*proc (4 tests)
+smoketests       = 318.33 sec*proc (16 tests)
+soscf            =  22.90 sec*proc (1 test)
+stability        =  29.80 sec*proc (3 tests)
+tdscf            = 130.82 sec*proc (7 tests)
+tutorial         = 191.75 sec*proc (6 tests)
+uhf              =  11.52 sec*proc (1 test)
+x2c              =  81.56 sec*proc (4 tests)
+
+Total Test time (real) = 1242.26 sec
+
+The following tests FAILED:
+	366 - pubchem1 (Failed)
+	367 - pubchem2 (Failed)
+	466 - pywrap-align (Failed)
+	467 - pywrap-align-chiral (Failed)
+	501 - python-pubchem (Failed)
+Errors while running CTest
+Output from these tests are in: /home/share/WUCHAO/yingzhouli/testuser/psi4/build/Testing/Temporary/LastTest.log
+Use "--rerun-failed --output-on-failure" to re-run the failed cases verbosely.
